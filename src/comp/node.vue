@@ -79,7 +79,7 @@
         </button>
       </div>
       <div 
-        v-if="!isMain && sanoNode.children.length > 0"
+        v-if="!isMain"
         class="flex flex-row-reverse items-center"
       >
         <router-link
@@ -89,7 +89,10 @@
           enter
           <svg class="w-4 h-4 inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
         </router-link>
-        <span class="px-2 text-gray-100 bg-gray-400 rounded-md">
+        <span
+          v-if="sanoNode.children.length > 0"
+          class="px-2 text-gray-100 bg-gray-400 rounded-md"
+        >
           {{ `${sanoNode.children.length} child node${sanoNode.children.length === 1 ? '' : 's'}` }}
         </span>
       </div>
