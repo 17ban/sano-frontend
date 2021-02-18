@@ -9,7 +9,7 @@
       <input
         class="py-3 px-4 bg-gray-50 placeholder-gray-400 text-gray-600 rounded-lg shadow-md appearance-none w-full block pl-12 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
         :value="mainNidRef"
-        @keyup.enter="search($event)"
+        @keyup.enter="searchHandler($event)"
         placeholder="Node ID"
         style="text-transform:uppercase;"
       >
@@ -21,7 +21,7 @@
       <node
         :sano-node="mainNodeRef"
         :is-main="true"
-        @post-new-node="refreshNodes"
+        @post-new-node="refreshNodes(mainNidRef)"
       ></node>
     </div>
 
@@ -54,7 +54,7 @@
         <node
           :sano-node="sanonode"
           :position="index + 1"
-          @post-new-node="refreshNodes"
+          @post-new-node="refreshNodes(mainNidRef)"
         ></node>
       </div>
     </div>
@@ -66,8 +66,14 @@
 <script lang="ts">
 import {
   ref,
+  watch,
   defineComponent
 } from 'vue'
+
+import {
+useRoute,
+  useRouter
+} from 'vue-router'
 
 import {
   getNode,
@@ -81,35 +87,72 @@ import {
 } from '../types'
 
 
+
 const mainNidRef = ref < Nid | undefined > ()
 const mainNodeRef = ref < SanoNode | undefined > ()
 const childNodesRef = ref < SanoNode[] | undefined > ()
 
-async function updateNodes() {
-  if (!mainNidRef.value) {
+
+async function updateNodes(nid?: Nid): Promise<boolean> {
+  if (!nid) {
     mainNodeRef.value = undefined
     childNodesRef.value = undefined
-    return
+    return false
   }
-  const mainNode = await getNode(mainNidRef.value)
+  const mainNode = await getNode(nid)
   mainNodeRef.value = mainNode
-  if (mainNode) {
-    const childNodes: SanoNode[] = []
-    const childNodesMap = await getNodes(mainNode.children)
-    for (const nid in childNodesMap) {
-      childNodes.push( < SanoNode > childNodesMap[nid])
-    }
-    childNodesRef.value = childNodes
-  } else {
+  if (!mainNode) {
     childNodesRef.value = undefined
+    return false
   }
+  const childNodes: SanoNode[] = []
+  const childNodesMap = await getNodes(mainNode.children)
+  for (const nid in childNodesMap) {
+    childNodes.push( < SanoNode > childNodesMap[nid])
+  }
+  childNodesRef.value = childNodes
+  return true
 }
 
-async function refreshNodes() {
-  if(mainNidRef.value) {
-    await cacheNodeBundle(mainNidRef.value)
-    await updateNodes()
+
+async function refreshNodes(nid?: Nid): Promise<boolean> {
+  if(!nid) {
+    return false
   }
+  await cacheNodeBundle(nid)
+  await updateNodes(nid)
+  return true
+}
+
+
+watch(mainNidRef, async newNid => {
+  await updateNodes(newNid)
+})
+
+
+function useRouterHandler() {
+  const router = useRouter()
+  const route = useRoute()
+  watch(
+    () => route.params.nid,
+    async nid => {
+      mainNidRef.value = <string>nid
+    }
+  )
+  
+  function searchHandler(event: KeyboardEvent) {
+    if(event.target) {
+      const nid = ( < HTMLInputElement > event.target).value
+        .trim()
+        .toUpperCase()
+      if(nid) {
+        router.push(`/node/${nid}`)
+      } else {
+        router.push(`/`)
+      }
+    }
+  }
+  return { searchHandler }
 }
 
 
@@ -125,40 +168,12 @@ export default defineComponent({
       mainNidRef,
       mainNodeRef,
       childNodesRef,
-      refreshNodes
+      refreshNodes,
+      ...useRouterHandler()
     }
   },
-  methods: {
-    search(event: KeyboardEvent) {
-      if(event.target) {
-        const nid = ( < HTMLInputElement > event.target).value
-          .trim()
-          .toUpperCase()
-        if(nid) {
-          this.$router.push(`/node/${nid}`)
-        } else {
-          this.$router.push(`/`)
-        }
-      }
-    }
-  },
-  beforeRouteEnter(to, from, next) {
-    next(async () => {
-      mainNidRef.value = < string > to.params.nid
-      await updateNodes()
-      document.title = `${mainNodeRef.value?.nid || 'Index'} - Sano`
-      window.scrollTo(0, 0)
-    })
-  },
-  async beforeRouteUpdate(to, from, next) {
-    next()
-    mainNidRef.value = < string > to.params.nid
-    await updateNodes()
-    document.title = `${mainNodeRef.value?.nid || 'Index'} - Sano`
-    window.scrollTo(0, 0)
-  },
-  async beforeRouteLeave(to, from, next) {
-    next()
+  beforeRouteEnter(to) {
+    mainNidRef.value = <string>to.params.nid
   }
 })
 </script>

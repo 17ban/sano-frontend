@@ -2,7 +2,9 @@
   <div class="selection-dark py-12 container mx-auto lg:w-7/12 font-mono" id="main-view">
     <router-view v-slot="{ Component }">
       <keep-alive>
-        <component :is="Component"></component>
+        <div>
+          <component :is="Component" />
+        </div>
       </keep-alive>
     </router-view>
   </div>
