@@ -44,7 +44,7 @@
         <a
           class="py-1.5 px-4 bg-gray-600 text-gray-50 rounded-lg shadow-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-75"
           :href="`/node/${sanoNode.parent}`"
-          @click.prevent="linkHandler(`/node/${sanoNode.parent}`)"
+          @click.prevent="$emit('click-link', `/node/${sanoNode.parent}`)"
         >
           <svg class="w-4 h-4 inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
             <path fill-rule="evenodd" d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd" />
@@ -88,7 +88,7 @@
         <a
           class="py-1.5 px-4 ml-3 bg-gray-600 text-gray-50 rounded-lg shadow-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-75"
           :href="`/node/${sanoNode.nid}`"
-          @click.prevent="linkHandler(`/node/${sanoNode.nid}`)"
+          @click.prevent="$emit('click-link', `/node/${sanoNode.nid}`)"
         >
           enter
           <svg class="w-4 h-4 inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
@@ -235,25 +235,11 @@ function useNewNodeForm() {
 
 
 
-function useLinkHandler() {
-  const router = useRouter()
-
-  async function linkHandler(href: string) {
-    await router.push(href)
-    window.scrollTo(0, 0)
-  }
-
-  return { linkHandler }
-}
-
-
-
 export default defineComponent({
   name: "node",
   setup() {
     return {
       ...useNewNodeForm(),
-      ...useLinkHandler(),
       dayjs
     }
   },
@@ -271,7 +257,7 @@ export default defineComponent({
       default: 0
     }
   },
-  emits: ['post-new-node']
+  emits: ['post-new-node', 'click-link']
 })
 </script>
 

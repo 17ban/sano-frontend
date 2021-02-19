@@ -17,7 +17,14 @@
     </div>
   </div>
 
-  <div v-if="mainNodeRef" class="p-4">
+  <div
+    v-if="mainNodeRef"
+    class="p-4"
+    :class="{ 
+      'opacity-0': pageStatus !== 'loaded',
+      'transition-all duration-300': useAnimation 
+    }"
+  >
     <!-- main node -->
     <div 
       v-for="mainNode of [mainNodeRef]"
@@ -29,6 +36,7 @@
         :sano-node="mainNode"
         :is-main="true"
         @post-new-node="refreshNodes(mainNidRef)"
+        @click-link="clickLinkHandler"
       ></node>
     </div>
 
@@ -64,6 +72,7 @@
           :sano-node="sanonode"
           :position="index + 1"
           @post-new-node="refreshNodes(mainNidRef)"
+          @click-link="clickLinkHandler"
         ></node>
       </div>
     </div>
@@ -76,7 +85,8 @@
 import {
   ref,
   watch,
-  defineComponent
+  defineComponent,
+  nextTick
 } from 'vue'
 
 import {
@@ -90,6 +100,8 @@ import {
   cacheNodeBundle
 } from '../store/nodes-cache'
 
+import { delay } from '../utils'
+
 import {
   Nid,
   SanoNode
@@ -100,6 +112,8 @@ import {
 const mainNidRef = ref < Nid | undefined > ()
 const mainNodeRef = ref < SanoNode | undefined > ()
 const childNodesRef = ref < SanoNode[] | undefined > ()
+const pageStatus = ref<'loaded' | 'loading'>('loading')
+const useAnimation = ref<boolean>(false)
 
 
 async function updateNodes(nid?: Nid): Promise<boolean> {
@@ -141,8 +155,16 @@ watch(mainNidRef, async newNid => {
     return
   }
   document.title = newNid ? `${newNid} - Sano` : 'Sano'
+  
+  pageStatus.value = 'loading'
   await updateNodes(newNid)
+  useAnimation.value = true
+  pageStatus.value = 'loaded'
+  await nextTick()
+  await delay(400)
+  useAnimation.value = false
 })
+
 
 
 function useRouterHandler() {
@@ -167,7 +189,14 @@ function useRouterHandler() {
       }
     }
   }
-  return { searchHandler }
+
+  async function clickLinkHandler(href: string) {
+    pageStatus.value = 'loading'
+    await nextTick()
+    await router.push(href)
+    window.scrollTo(0, 0)
+  }
+  return { searchHandler, clickLinkHandler }
 }
 
 
@@ -180,6 +209,8 @@ export default defineComponent({
   },
   setup() {
     return {
+      pageStatus,
+      useAnimation,
       mainNidRef,
       mainNodeRef,
       childNodesRef,
