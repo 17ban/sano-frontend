@@ -126,6 +126,12 @@ async function refreshNodes(nid?: Nid): Promise<boolean> {
 
 
 watch(mainNidRef, async newNid => {
+  const upperCase = newNid?.toUpperCase()
+  if(mainNidRef.value !== upperCase) {
+    mainNidRef.value = upperCase
+    return
+  }
+  document.title = `${ newNid || 'Index' } - Sano`
   await updateNodes(newNid)
 })
 
