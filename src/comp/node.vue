@@ -1,28 +1,25 @@
 <template>
   <div class="flex flex-col p-3 shadow-md bg-gray-500 rounded-lg">
+    <!-- node meta -->
     <div class="text-sm">
       <div class="inline-block">
-        <span class="text-gray-300">
+        <span class="text-gray-300 select-all">
           {{ dayjs(sanoNode.time).format('YYYY/MM/DD HH:mm:ss') }}
         </span>
       </div>
       <div class="inline-block px-3">
-        <span class="text-blue-300">
+        <span class="text-blue-300 select-all">
           {{ `#${position === 0 ? 'main' : position}` }}
         </span>
       </div>
       <div class="inline-block">
-        <a
-          class="text-pink-300"
-          :class="{ 'pointer-events-none' : isMain }"
-          :href="`/node/${sanoNode.nid}`"
-          @click.prevent="linkHandler(`/node/${sanoNode.nid}`)"
-        >
+        <span title="Node ID" class="text-pink-300 select-all">
           {{ sanoNode.nid }}
-        </a>
+        </span>
       </div>
     </div>
 
+    <!-- username -->
     <div class="text-sm">
       <div class="inline-block">
         <span class="text-purple-300">
@@ -31,12 +28,14 @@
       </div>
     </div>
 
+    <!-- node content -->
     <div class="pt-4 pb-1 text-base">
       <p class="text-gray-50">{{ sanoNode.content }}</p>
     </div>
 
     <hr class="mt-5 border-t-2 border-gray-400 ">
 
+    <!-- buttons -->
     <div class="flex flex-row pt-3 text-sm">
       <div
         v-if="isMain && sanoNode.depth !== 0"
@@ -59,6 +58,7 @@
       >
         <button
           class="p-2 mr-2 bg-gray-600 text-gray-50 rounded-2xl shadow-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-75"
+          :title="`New node on ${sanoNode.nid}`"
           @click="triggerForm"
         >
           <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -73,6 +73,7 @@
       >
         <button
           class="p-2 mr-2 bg-gray-600 text-gray-50 rounded-2xl shadow-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-75"
+          :title="`New node on ${sanoNode.nid}`"
           @click="triggerForm"
         >
           <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -101,6 +102,7 @@
       </div>
     </div>
 
+    <!-- new node form -->
     <div
       class="overflow-hidden transition-all duration-300"
       :class="{ invisible: !formVisible, 'opacity-50': !formVisible, 'max-h-0': !formVisible, 'max-h-96': formVisible, 'mt-4': formVisible, 'mt-0': !formVisible }"
@@ -113,8 +115,9 @@
           </span>
         </h1>
         <form
-          @submit.prevent="postNewNode($event, sanoNode.nid).then(ok => ok ? $emit('post-new-node'): null)"
+          :id="`new-node-form-${sanoNode.nid}`"
           class="flex-grow flex flex-col space-y-5"
+          @submit.prevent="postNewNode($event, sanoNode.nid).then(ok => ok ? $emit('post-new-node'): null)"
         >
           <div class="relative text-gray-400 focus-within:text-gray-50">
             <div class="absolute inset-y-0 left-0 pl-3 pt-3 pointer-events-none">
@@ -255,19 +258,19 @@ export default defineComponent({
     }
   },
   props: {
-  sanoNode: {
-    type: Object as PropType<SanoNode>,
-    required: true
+    sanoNode: {
+      type: Object as PropType<SanoNode>,
+      required: true
+    },
+    isMain: {
+      type: Boolean,
+      default: false
+    },
+    position: {
+      type: Number,
+      default: 0
+    }
   },
-  isMain: {
-    type: Boolean,
-    default: false
-  },
-  position: {
-    type: Number,
-    default: 0
-  }
-},
   emits: ['post-new-node']
 })
 </script>

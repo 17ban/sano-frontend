@@ -1,5 +1,5 @@
 <template>
-  <div class="selection-dark py-12 container mx-auto lg:w-7/12 font-mono" id="main-view">
+  <div class="py-12 mx-auto md:w-3/4 lg:w-7/12 xl:w-1/2 2xl:w-5/12 font-mono selection-dark" id="main-view">
     <router-view v-slot="{ Component }">
       <keep-alive>
         <div>

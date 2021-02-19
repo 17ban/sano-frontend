@@ -1,5 +1,6 @@
 <template>
-  <div class="p-4 w-full max-w-md mx-auto space-x-3">
+  <!-- search bar for nid -->
+  <div class="p-4 w-full max-w-md mx-auto">
     <div class="relative selection-gray text-gray-400 focus-within:text-gray-600">
       <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
         <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -16,21 +17,29 @@
     </div>
   </div>
 
-  <div class="p-4" v-if="mainNodeRef">
-    <div class="py-3 main-node" :id="`nid-${mainNodeRef.nid}`">
+  <div v-if="mainNodeRef" class="p-4">
+    <!-- main node -->
+    <div 
+      v-for="mainNode of [mainNodeRef]"
+      class="main-node py-3"
+      :key="mainNode.nid"
+      :id="`nid-${mainNode.nid}`"
+    >
       <node
-        :sano-node="mainNodeRef"
+        :sano-node="mainNode"
         :is-main="true"
         @post-new-node="refreshNodes(mainNidRef)"
       ></node>
     </div>
 
+    <!-- division between main node and child nodes -->
     <div class="py-3 flex flex-col items-center">
       <div class="w-1 h-4 my-2 rounded-md bg-gray-600"></div>
       <div class="w-1 h-4 my-2 rounded-md bg-gray-600"></div>
       <div class="w-1 h-4 my-2 rounded-md bg-gray-600"></div>
     </div>
     
+    <!-- the amount of nodes -->
     <div class="py-3 flex flex-col items-center">
       <div class="text-center px-5 py-0.5 rounded-2xl shadow-md border-none bg-gray-600">
         <p class="text-gray-100 text-lg leading-8">
@@ -43,11 +52,11 @@
       </div>
     </div>
 
-
+    <!-- child nodes -->
     <div class="child-nodes" v-if="childNodesRef && childNodesRef.length > 0">
       <div
-        class="child-node my-4"
         v-for="(sanonode, index) in childNodesRef"
+        class="child-node my-4"
         :id="`nid-${sanonode.nid}`"
         :key="sanonode.nid"
       >
@@ -131,7 +140,7 @@ watch(mainNidRef, async newNid => {
     mainNidRef.value = upperCase
     return
   }
-  document.title = `${ newNid || 'Index' } - Sano`
+  document.title = newNid ? `${newNid} - Sano` : 'Sano'
   await updateNodes(newNid)
 })
 
