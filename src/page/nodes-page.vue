@@ -22,7 +22,7 @@
     class="p-4"
     :class="{ 
       'opacity-0': pageStatus !== 'loaded',
-      'transition-all duration-300': useAnimation 
+      'transition-all duration-500': useAnimation 
     }"
   >
     <!-- main node -->
@@ -156,12 +156,14 @@ watch(mainNidRef, async newNid => {
   }
   document.title = newNid ? `${newNid} - Sano` : 'Sano'
   
+  //update nodes and enable animation
   pageStatus.value = 'loading'
+  await nextTick()
   await updateNodes(newNid)
   useAnimation.value = true
   pageStatus.value = 'loaded'
   await nextTick()
-  await delay(400)
+  await delay(500)
   useAnimation.value = false
 })
 
@@ -192,7 +194,6 @@ function useRouterHandler() {
 
   async function clickLinkHandler(href: string) {
     pageStatus.value = 'loading'
-    await nextTick()
     await router.push(href)
     window.scrollTo(0, 0)
   }
