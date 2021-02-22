@@ -2,7 +2,7 @@ import './index.css'
 
 import { createApp } from 'vue'
 import router from './router'
-import App from './App.vue'
+import App from './view/App.vue'
 
 async function appInit() {
   //create vue app instance

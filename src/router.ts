@@ -5,15 +5,15 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      component: () => import("./page/nodes-page.vue")
+      component: () => import("./view/nodes-page.vue")
     },
     {
       path: '/node/:nid',
-      component: () => import("./page/nodes-page.vue")
+      component: () => import("./view/nodes-page.vue")
     },
     {
       path: '/:catchAll(.*)',
-      component: () => import("./page/err.vue")
+      component: () => import("./view/err-page.vue")
     }
   ]
 })

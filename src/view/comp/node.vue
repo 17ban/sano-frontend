@@ -1,60 +1,46 @@
 <template>
-  <div class="flex flex-col p-3 shadow-md bg-gray-500 rounded-lg">
+  <div
+    class="flex flex-col p-3 shadow-md bg-gray-500 rounded-lg"
+    :id="`nid-${sanoNode.nid}`"
+  >
     <!-- node meta -->
     <div class="text-sm">
-      <div class="inline-block">
-        <span class="text-gray-300 select-all">
-          {{ dayjs(sanoNode.time).format('YYYY/MM/DD HH:mm:ss') }}
-        </span>
-      </div>
-      <div class="inline-block px-3">
-        <span class="text-blue-300 select-all">
-          {{ `#${position === 0 ? 'main' : position}` }}
-        </span>
-      </div>
-      <div class="inline-block">
-        <span title="Node ID" class="text-pink-300 select-all">
-          {{ sanoNode.nid }}
-        </span>
-      </div>
-    </div>
-
-    <!-- username -->
-    <div class="text-sm">
-      <div class="inline-block">
-        <span class="text-purple-300">
-          {{ sanoNode.username || '(Anonymous)' }}
-        </span>
-      </div>
+      <span class="inline-block pr-3 text-gray-300 select-all">
+        {{ dayjs(sanoNode.time).format('YYYY/MM/DD HH:mm:ss') }}
+      </span>
+      <span class="inline-block pr-3 text-blue-300 select-all">
+        {{ `#${position === 0 ? 'main' : position}` }}
+      </span>
+      <span class="inline-block text-pink-300 select-all" title="Node ID">
+        {{ sanoNode.nid }}
+      </span>
+      <br>
+      <span class="inline-block text-purple-300">
+        {{ sanoNode.username || '(Anonymous)' }}
+      </span>
     </div>
 
     <!-- node content -->
-    <div class="pt-4 pb-1 text-base">
+    <div class="pt-4 pb-1">
       <p class="text-gray-50">{{ sanoNode.content }}</p>
     </div>
 
-    <hr class="mt-5 border-t-2 border-gray-400 ">
+    <hr class="mt-5 border-t-2 border-gray-400">
 
     <!-- buttons -->
-    <div class="flex flex-row pt-3 text-sm">
+    <div
+      class="flex flex-row pt-3 text-sm"
+      :class="{ 
+        'flex-row-reverse': isMain,
+        'flex-row': !isMain
+      }"
+    >
       <div
-        v-if="isMain && sanoNode.depth !== 0"
-        class="flex flex-row items-center"
-      >
-        <a
-          class="py-1.5 px-4 bg-gray-600 text-gray-50 rounded-lg shadow-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-75"
-          :href="`/node/${sanoNode.parent}`"
-          @click.prevent="$emit('click-link', `/node/${sanoNode.parent}`)"
-        >
-          <svg class="w-4 h-4 inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd" />
-          </svg>
-          parent node
-        </a>
-      </div>
-      <div
-        v-if="isMain"
-        class="flex-grow flex flex-row-reverse items-center"
+        class="flex-grow flex items-center"
+        :class="{ 
+          'flex-row-reverse': isMain,
+          'flex-row': !isMain
+        }"
       >
         <button
           class="p-2 mr-2 bg-gray-600 text-gray-50 rounded-2xl shadow-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-75"
@@ -67,24 +53,34 @@
         </button>
       </div>
 
-      <div
-        v-if="!isMain"
-        class="flex-grow flex flex-row items-center"
-      >
-        <button
-          class="p-2 mr-2 bg-gray-600 text-gray-50 rounded-2xl shadow-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-75"
-          :title="`New node on ${sanoNode.nid}`"
-          @click="triggerForm"
+      <div>
+        <div
+          v-if="isMain && sanoNode.depth !== 0"
+          class="flex flex-row items-center"
         >
-          <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
-          </svg>
-        </button>
+          <a
+            class="py-1.5 px-4 bg-gray-600 text-gray-50 rounded-lg shadow-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-75"
+            :href="`/node/${sanoNode.parent}`"
+            @click.prevent="$emit('click-link', `/node/${sanoNode.parent}`)"
+          >
+            <svg class="w-4 h-4 inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+            </svg>
+            parent node
+          </a>
+        </div>
       </div>
+
       <div 
         v-if="!isMain"
-        class="flex flex-row-reverse items-center"
+        class="flex flex-row items-center"
       >
+        <span
+          v-if="sanoNode.children.length > 0"
+          class="px-2 text-gray-100 bg-gray-400 rounded-md"
+        >
+          {{ `${sanoNode.children.length} child node${sanoNode.children.length === 1 ? '' : 's'}` }}
+        </span>
         <a
           class="py-1.5 px-4 ml-3 bg-gray-600 text-gray-50 rounded-lg shadow-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-75"
           :href="`/node/${sanoNode.nid}`"
@@ -93,12 +89,6 @@
           enter
           <svg class="w-4 h-4 inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
         </a>
-        <span
-          v-if="sanoNode.children.length > 0"
-          class="px-2 text-gray-100 bg-gray-400 rounded-md"
-        >
-          {{ `${sanoNode.children.length} child node${sanoNode.children.length === 1 ? '' : 's'}` }}
-        </span>
       </div>
     </div>
 
@@ -170,16 +160,15 @@ import {
   ref
 } from 'vue'
 
-import { postNode } from '../api/node'
+import { postNode } from '../../api/node'
 
 
 import {
   Nid,
   SanoNode
-} from "../types"
+} from "../../types"
 
 import dayjs from "dayjs"
-import { useRouter } from 'vue-router'
 
 
 

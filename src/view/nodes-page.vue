@@ -1,25 +1,15 @@
 <template>
   <!-- search bar for nid -->
-  <div class="p-4 w-full max-w-md mx-auto">
-    <div class="relative selection-gray text-gray-400 focus-within:text-gray-600">
-      <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-        <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7" />
-        </svg>
-      </div>
-      <input
-        class="py-3 px-4 bg-gray-50 placeholder-gray-400 text-gray-600 rounded-lg shadow-md appearance-none w-full block pl-12 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-        :value="mainNidRef"
-        @keyup.enter="searchHandler($event)"
-        placeholder="Node ID"
-        style="text-transform:uppercase;"
-      >
-    </div>
+  <div class="py-4 w-full max-w-md mx-auto">
+    <search-bar
+      placeholder="Node ID"
+      :value="mainNidRef"
+      :handler="searchHandler"
+    ></search-bar>
   </div>
 
   <div
     v-if="mainNodeRef"
-    class="p-4"
     :class="{ 
       'opacity-0': pageStatus !== 'loaded',
       'transition-all duration-500': useAnimation 
@@ -27,13 +17,11 @@
   >
     <!-- main node -->
     <div 
-      v-for="mainNode of [mainNodeRef]"
-      class="main-node py-3"
-      :key="mainNode.nid"
-      :id="`nid-${mainNode.nid}`"
+      class="main-node py-4"
+      :key="mainNodeRef.nid"
     >
       <node
-        :sano-node="mainNode"
+        :sano-node="mainNodeRef"
         :is-main="true"
         @post-new-node="refreshNodes(mainNidRef)"
         @click-link="clickLinkHandler"
@@ -41,32 +29,31 @@
     </div>
 
     <!-- division between main node and child nodes -->
-    <div class="py-3 flex flex-col items-center">
+    <div class="py-4 flex flex-col items-center">
       <div class="w-1 h-4 my-2 rounded-md bg-gray-600"></div>
       <div class="w-1 h-4 my-2 rounded-md bg-gray-600"></div>
       <div class="w-1 h-4 my-2 rounded-md bg-gray-600"></div>
     </div>
     
     <!-- the amount of nodes -->
-    <div class="py-3 flex flex-col items-center">
+    <div class="py-4 flex flex-col items-center">
       <div class="text-center px-5 py-0.5 rounded-2xl shadow-md border-none bg-gray-600">
-        <p class="text-gray-100 text-lg leading-8">
+        <span class="text-gray-100 text-lg leading-8">
           {{
             (childNodesRef && childNodesRef.length > 0) ? 
               `${childNodesRef.length} Child Node${childNodesRef.length === 1 ? '' : 's'}` :
               'No Child Node'
           }}
-        </p>
+        </span>
       </div>
     </div>
 
     <!-- child nodes -->
-    <div class="child-nodes" v-if="childNodesRef && childNodesRef.length > 0">
+    <div v-if="childNodesRef && childNodesRef.length > 0">
       <div
         v-for="(sanonode, index) in childNodesRef"
-        class="child-node my-4"
-        :id="`nid-${sanonode.nid}`"
         :key="sanonode.nid"
+        class="child-node my-4"
       >
         <node
           :sano-node="sanonode"
@@ -90,7 +77,7 @@ import {
 } from 'vue'
 
 import {
-useRoute,
+  useRoute,
   useRouter
 } from 'vue-router'
 
@@ -137,6 +124,17 @@ async function updateNodes(nid?: Nid): Promise<boolean> {
   return true
 }
 
+async function updateNodesWithAnimation(nid?: Nid) {
+  pageStatus.value = 'loading'
+  await nextTick()
+  await updateNodes(nid)
+  useAnimation.value = true
+  pageStatus.value = 'loaded'
+  await nextTick()
+  await delay(500)
+  useAnimation.value = false
+}
+
 
 async function refreshNodes(nid?: Nid): Promise<boolean> {
   if(!nid) {
@@ -156,15 +154,7 @@ watch(mainNidRef, async newNid => {
   }
   document.title = newNid ? `${newNid} - Sano` : 'Sano'
   
-  //update nodes and enable animation
-  pageStatus.value = 'loading'
-  await nextTick()
-  await updateNodes(newNid)
-  useAnimation.value = true
-  pageStatus.value = 'loaded'
-  await nextTick()
-  await delay(500)
-  useAnimation.value = false
+  await updateNodesWithAnimation(newNid)
 })
 
 
@@ -201,11 +191,12 @@ function useRouterHandler() {
 }
 
 
-
-import node from "../comp/node.vue"
+import searchBar from './comp/search-bar.vue'
+import node from "./comp/node.vue"
 export default defineComponent({
   name: 'nodes-page',
   components: {
+    searchBar,
     node
   },
   setup() {
