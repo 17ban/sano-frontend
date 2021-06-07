@@ -5,17 +5,17 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      component: () => import("./view/nodes-page.vue")
+      component: () => import('./views/node.vue'),
     },
     {
       path: '/node/:nid',
-      component: () => import("./view/nodes-page.vue")
+      component: () => import('./views/node.vue'),
     },
     {
       path: '/:catchAll(.*)',
-      component: () => import("./view/err-page.vue")
-    }
-  ]
+      component: () => import('./views/err.vue'),
+    },
+  ],
 })
 
 export default router

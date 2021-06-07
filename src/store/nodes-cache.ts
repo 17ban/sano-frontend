@@ -1,21 +1,17 @@
+import { ref } from 'vue'
 import {
   Nid,
   SanoNode,
-  SanoNodeMap
-} from "../types";
+  SanoNodeMap,
+} from '../types'
 
 import {
   getNodes as getNodesApi,
   getNode as getNodeApi,
-  getNodeBundle as getNodeBundleApi
+  getNodeBundle as getNodeBundleApi,
 } from '../api/node'
 
-import { ref } from "vue";
-
-
-
 export const sanoNodeMapRef = ref<SanoNodeMap>({})
-
 
 async function _cacheNode<NID extends Nid>(nid: NID) {
   const res = await getNodeApi(nid)
@@ -28,7 +24,6 @@ async function _cacheNode<NID extends Nid>(nid: NID) {
   return node
 }
 
-
 async function _cacheNodes<NID extends Nid>(nids: NID[]) {
   const res = await getNodesApi(nids)
   if (!res.ok) {
@@ -39,7 +34,6 @@ async function _cacheNodes<NID extends Nid>(nids: NID[]) {
   Object.assign(sanoNodeMapRef.value, nodes)
   return nodes
 }
-
 
 export async function cacheNodeBundle(nid: Nid) {
   const res = await getNodeBundleApi(nid)
@@ -52,26 +46,21 @@ export async function cacheNodeBundle(nid: Nid) {
   return nodes
 }
 
-
-export async function getNode<NID extends Nid>(nid: NID)
-: Promise<SanoNode<NID> | undefined> {
-  return <SanoNode<NID> | undefined>sanoNodeMapRef.value[nid] || await _cacheNode(nid)
+export async function getNode<NID extends Nid>(nid: NID): Promise<SanoNode | undefined> {
+  return <SanoNode | undefined>sanoNodeMapRef.value[nid] || await _cacheNode(nid)
 }
 
-
-export async function getNodes<NID extends Nid>(nids: NID[])
-: Promise<SanoNodeMap<NID>> {
+export async function getNodes<NID extends Nid>(nids: NID[]): Promise<SanoNodeMap> {
   const nodes: SanoNodeMap = { }
   const getList: Nid[] = []
-  for(const nid of nids) {
-    if(sanoNodeMapRef.value[nid]) {
+  for (const nid of nids) {
+    if (sanoNodeMapRef.value[nid])
       nodes[nid] = sanoNodeMapRef.value[nid]
-    } else {
+    else
       getList.push(nid)
-    }
   }
-  if(getList.length > 0) {
+  if (getList.length > 0)
     Object.assign(nodes, await _cacheNodes(getList))
-  }
+
   return nodes
 }

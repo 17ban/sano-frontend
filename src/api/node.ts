@@ -1,49 +1,36 @@
-import {
+import type {
   Nid,
   SanoNode,
   SanoNodeMap,
-  JsonResponse
+  JsonResponse,
 } from '../types'
 
 import {
-  queryStr
-} from '../utils'
+  queryStr,
+} from '../utils/index'
 
-
-
-export function getNode<NID extends Nid>(nid: NID)
-: Promise<JsonResponse<SanoNode<NID>>>
-{
+export function getNode(nid: Nid): Promise<JsonResponse<SanoNode>> {
   const query = { nid }
-  return fetch('/api/node' + queryStr(query))
+  return fetch(`/api/node${queryStr(query)}`)
 }
 
-
-export function getNodes<NID extends Nid>(nids: NID[])
-: Promise<JsonResponse<SanoNodeMap<NID>>>
-{
+export function getNodes(nids: Nid[]): Promise<JsonResponse<SanoNodeMap>> {
   const query = { nids: nids.join(',') }
-  return fetch('/api/nodes' + queryStr(query))
+  return fetch(`/api/nodes${queryStr(query)}`)
 }
 
-
-export function getNodeBundle(nid: Nid) 
-: Promise<JsonResponse<SanoNodeMap>>
-{
+export function getNodeBundle(nid: Nid): Promise<JsonResponse<SanoNodeMap>> {
   const query = { nid }
-  return fetch('/api/nodebundle' + queryStr(query))
+  return fetch(`/api/nodebundle${queryStr(query)}`)
 }
 
-
-export function postNode(content: string, parent: Nid, username?: string | null)
-: Promise<JsonResponse<{ nid: Nid }>>
-{
-  const data = { content, parent, username }
+export function postNode(content: string, parent: Nid, nickname?: string | null): Promise<JsonResponse<{ nid: Nid }>> {
+  const data = { content, parent, nickname }
   return fetch('/api/node', {
     method: 'POST',
     body: JSON.stringify(data),
     headers: {
-      'content-type': 'application/json'
-    }
+      'content-type': 'application/json',
+    },
   })
 }

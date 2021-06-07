@@ -7,32 +7,39 @@
     </div>
     <input
       class="py-3 px-4 bg-gray-50 placeholder-gray-400 text-gray-600 rounded-lg shadow-md appearance-none w-full block pl-12 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-      style="text-transform:uppercase;"
-      :placeholder="placeholder"
-      :value="value"
-      @keyup.enter="handler"
+      style="text-transform: uppercase;"
+      :value="props.nid"
+      :placeholder="props.placeholder"
+      @keyup.enter="searchHandler"
     >
   </div>
 </template>
 
+<script setup lang="ts">
+import { defineProps } from 'vue'
+import { useRouter } from 'vue-router'
 
-<script lang="ts">
-import { defineComponent, PropType } from 'vue'
+const router = useRouter()
 
-export default defineComponent({
-  name: "search-bar",
-  props: {
-    'placeholder': {
-      type: String,
-      default: ''
-    },
-    'value': {
-      default: ''
-    },
-    'handler': {
-      type: Function as PropType<(evt: KeyboardEvent) => void>,
-      default: (evt: KeyboardEvent) => undefined
-    }
-  }
+const props = defineProps({
+  nid: {
+    type: String,
+    default: '',
+  },
+  placeholder: {
+    type: String,
+    default: '',
+  },
 })
+
+function searchHandler(evt: KeyboardEvent) {
+  const target = evt.target as HTMLInputElement
+  const nid = target.value
+    .trim()
+    .toUpperCase()
+  if (nid)
+    router.push(`/node/${nid}`)
+  else
+    router.push('/')
+}
 </script>
