@@ -14,9 +14,7 @@ export interface SanoNode {
   nickname?: string
 }
 
-export type SanoNodeMap = {
-  [nid: string]: SanoNode | undefined
-}
+export type SanoNodeMap = Record<string, SanoNode | undefined>
 
 export interface JsonResponse<T> extends Response {
   json(): Promise<T>
