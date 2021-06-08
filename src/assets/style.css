@@ -16,3 +16,7 @@ body {
 .selection-gray *::selection {
   background:#c9cbcf;
 }
+
+.selection-deep-gray *::selection {
+  background:#5f6c83;
+}

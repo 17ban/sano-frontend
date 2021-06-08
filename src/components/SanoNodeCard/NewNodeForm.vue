@@ -67,7 +67,7 @@ async function postNewNode(event: Event): Promise<boolean> {
         class="flex-grow flex flex-col space-y-5"
         @submit.prevent="postNewNode"
       >
-        <div class="relative text-gray-400 focus-within:text-gray-50">
+        <div class="relative text-gray-400 focus-within:text-gray-50 selection-deep-gray">
           <div class="absolute inset-y-0 left-0 pl-3 pt-3 pointer-events-none">
             <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
               <path fill-rule="evenodd" d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z" clip-rule="evenodd" />
@@ -80,7 +80,7 @@ async function postNewNode(event: Event): Promise<boolean> {
             required
           ></textarea>
         </div>
-        <div class="relative text-gray-400 focus-within:text-gray-50">
+        <div class="relative text-gray-400 focus-within:text-gray-50 selection-deep-gray">
           <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
             <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
               <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
