@@ -1,0 +1,13 @@
+{
+  "volar.tsPlugin": true,
+  "deno.enable": true,
+  "cSpell.words": [
+    "antfu",
+    "compat",
+    "dompurify",
+    "nids",
+    "nodebundle",
+    "sano",
+    "tailwindcss"
+  ]
+}
