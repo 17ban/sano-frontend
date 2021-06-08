@@ -1,0 +1,14 @@
+body {
+  background-attachment: fixed;
+  background-color: #9ca9af;
+}
+
+.selection-dark *::selection {
+  background: #4b5669;
+}
+.selection-gray *::selection {
+  background: #c9cbcf;
+}
+.selection-deep-gray *::selection {
+  background: #5f6c83;
+}

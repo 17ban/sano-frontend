@@ -3,13 +3,17 @@ lockfileVersion: 5.3
 specifiers:
   '@antfu/eslint-config': ^0.6.5
   '@tailwindcss/postcss7-compat': ^2.1.4
+  '@types/marked': ^2.0.3
   '@types/node': ^15.12.1
   '@typescript-eslint/eslint-plugin': ^4.26.1
   '@vitejs/plugin-vue': ^1.2.3
   '@vue/compiler-sfc': ^3.0.5
   autoprefixer: '9'
   dayjs: ^1.10.4
+  dompurify: ^2.2.9
   eslint: 7.28.0
+  highlight.js: ^11.0.1
+  marked: ^2.0.7
   postcss: '7'
   tailwindcss: npm:@tailwindcss/postcss7-compat@^2.1.4
   typescript: ^4.1.3
@@ -20,12 +24,16 @@ specifiers:
 
 dependencies:
   dayjs: 1.10.5
+  dompurify: 2.2.9
+  highlight.js: 11.0.1
+  marked: 2.0.7
   vue: 3.0.11
   vue-router: 4.0.8_vue@3.0.11
 
 devDependencies:
   '@antfu/eslint-config': 0.6.5_eslint@7.28.0+typescript@4.3.2
   '@tailwindcss/postcss7-compat': 2.1.4
+  '@types/marked': 2.0.3
   '@types/node': 15.12.1
   '@typescript-eslint/eslint-plugin': 4.26.1_eslint@7.28.0+typescript@4.3.2
   '@vitejs/plugin-vue': 1.2.3_@vue+compiler-sfc@3.0.11
@@ -403,6 +411,10 @@ packages:
 
   /@types/json5/0.0.29:
     resolution: {integrity: sha1-7ihweulOEdK4J7y+UnC86n8+ce4=}
+    dev: true
+
+  /@types/marked/2.0.3:
+    resolution: {integrity: sha512-lbhSN1rht/tQ+dSWxawCzGgTfxe9DB31iLgiT1ZVT5lshpam/nyOA1m3tKHRoNPctB2ukSL22JZI5Fr+WI/zYg==}
     dev: true
 
   /@types/node/15.12.1:
@@ -1114,6 +1126,10 @@ packages:
       domelementtype: 2.2.0
     dev: true
 
+  /dompurify/2.2.9:
+    resolution: {integrity: sha512-+9MqacuigMIZ+1+EwoEltogyWGFTJZWU3258Rupxs+2CGs4H914G9er6pZbsme/bvb5L67o2rade9n21e4RW/w==}
+    dev: false
+
   /domutils/2.7.0:
     resolution: {integrity: sha512-8eaHa17IwJUPAiB+SoTYBo5mCdeMgdcAoXJ59m6DT1vw+5iLS3gNoqYaRowaBKtGVrOF1Jz4yDTgYKLK2kvfJg==}
     dependencies:
@@ -1767,6 +1783,11 @@ packages:
     resolution: {integrity: sha512-WdZTbAByD+pHfl/g9QSsBIIwy8IT+EsPiKDs0KNX+zSHhdDLFKdZu0BQHljvO+0QI/BasbMSUa8wYNCZTvhslg==}
     dev: true
 
+  /highlight.js/11.0.1:
+    resolution: {integrity: sha512-EqYpWyTF2s8nMfttfBA2yLKPNoZCO33pLS4MnbXQ4hECf1TKujCt1Kq7QAdrio7roL4+CqsfjqwYj4tYgq0pJQ==}
+    engines: {node: '>=12.0.0'}
+    dev: false
+
   /hosted-git-info/2.8.9:
     resolution: {integrity: sha512-mxIDAb9Lsm6DoOJ7xH+5+X4y1LU/4Hi50L9C5sIswK3JzULS4bwk1FvjdBgvYR4bzT4tuUQiC15FE2f5HbLvYw==}
     dev: true
@@ -2141,6 +2162,12 @@ packages:
     dependencies:
       sourcemap-codec: 1.4.8
     dev: true
+
+  /marked/2.0.7:
+    resolution: {integrity: sha512-BJXxkuIfJchcXOJWTT2DOL+yFWifFv2yGYOUzvXg8Qz610QKw+sHCvTMYwA+qWGhlA2uivBezChZ/pBy1tWdkQ==}
+    engines: {node: '>= 8.16.2'}
+    hasBin: true
+    dev: false
 
   /merge-source-map/1.1.0:
     resolution: {integrity: sha512-Qkcp7P2ygktpMPh2mCQZaf3jhN6D3Z/qVZHSdWvQ+2Ef5HgRAPBO57A77+ENm0CPx2+1Ce/MYKi3ymqdfuqibw==}

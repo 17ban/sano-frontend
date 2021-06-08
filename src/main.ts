@@ -1,4 +1,5 @@
-import './assets/style.css'
+import './assets/index.css'
+import 'highlight.js/styles/atom-one-dark.css'
 
 import { createApp } from 'vue'
 import router from './router'

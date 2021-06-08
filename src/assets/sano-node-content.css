@@ -1,0 +1,61 @@
+.sano-node-content pre {
+  margin: 4px 0;
+  padding: 10px 12px;
+  background-color: rgba(47, 55, 77, 0.8);
+  border-radius: 4px;
+  white-space: pre;
+}
+.sano-node-content pre *::selection {
+  background: rgba(255, 255, 255, 0.25);
+}
+.sano-node-content pre code {
+  padding-top: 5px;
+  max-height: 500px;
+  background-color: rgba(0, 0, 0, 0);
+  display: block;
+  overflow: scroll;
+}
+.sano-node-content pre code::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+  background: 0 0;
+}
+.sano-node-content pre code::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.4);
+}
+.sano-node-content pre code::-webkit-scrollbar-corner{
+  background: rgba(0, 0, 0, 0);
+}
+
+.sano-node-content h1 {
+  font-size: 2em;
+  font-weight: bold;
+}
+.sano-node-content h2 {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+.sano-node-content h3 {
+  font-size: 1.17em;
+  font-weight: bold;
+}
+.sano-node-content h4 {
+  font-size: 2em;
+  font-weight: bold;
+}
+.sano-node-content h5 {
+  font-size: 0.83em;
+  font-weight: bold;
+}
+.sano-node-content h6 {
+  font-size: 0.67em;
+  font-weight: bold;
+}
+
+.sano-node-content a {
+  color: rgb(96, 197, 255);
+}
+.sano-node-content a:hover {
+  color: rgb(150, 225, 255);
+  text-decoration: underline;
+}

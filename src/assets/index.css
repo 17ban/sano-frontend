@@ -1,0 +1,8 @@
+/*! @import */
+@import './sano-node-content.css';
+@import './background.css';
+@import './global.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
