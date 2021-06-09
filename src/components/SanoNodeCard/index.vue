@@ -32,7 +32,7 @@ function formSubmitHandler() {
 <template>
   <div
     :id="`nid-${props.sanoNode.nid}`"
-    class="p-3 bg-gray-500 rounded-lg"
+    class="px-5 py-3 bg-gray-500 rounded-lg"
   >
     <Meta
       :card-store="cardStore"

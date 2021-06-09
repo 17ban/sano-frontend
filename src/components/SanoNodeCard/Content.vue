@@ -19,10 +19,10 @@ const props = defineProps({
 
 <template>
   <div class="sano-node-content pt-4 pb-1 text-gray-50">
-    <p v-if="props.sanoNode.type === 'text'">
+    <div v-if="props.sanoNode.type === 'text'">
       {{ props.sanoNode.content }}
-    </p>
-    <p
+    </div>
+    <div
       v-else-if="props.sanoNode.type === 'md'"
       v-html="props.sanoNode.content"
     />

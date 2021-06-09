@@ -27,35 +27,75 @@
   background: rgba(0, 0, 0, 0);
 }
 
+.sano-node-content p {
+  margin: 16px 0;
+}
+.sano-node-content ol {
+  margin: 16px 0;
+  padding: 0 0 0 40px;
+  list-style: decimal;
+}
+.sano-node-content ul {
+  margin: 16px 0;
+  padding: 0 0 0 40px;
+  list-style: disc;
+}
+.sano-node-content blockquote {
+  margin: 16px 0;
+  padding: 0 16px;
+  border-left: 4px solid rgba(43, 255, 149, 0.6);
+}
+
+.sano-node-content img {
+  display: inline;
+}
+
+.sano-node-content h1, .sano-node-content h2, .sano-node-content h3,
+.sano-node-content h4, .sano-node-content h5, .sano-node-content h6 {
+  font-weight: bold;
+}
 .sano-node-content h1 {
   font-size: 2em;
-  font-weight: bold;
+  margin: 22px 0 18px 0;
+  padding-bottom: 2px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
 }
 .sano-node-content h2 {
   font-size: 1.5em;
-  font-weight: bold;
+  margin: 18px 0 14px 0;
+  padding-bottom: 2px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
 }
 .sano-node-content h3 {
   font-size: 1.17em;
-  font-weight: bold;
+  margin: 16px 0 14px 0;
 }
 .sano-node-content h4 {
-  font-size: 2em;
-  font-weight: bold;
+  font-size: 1em;
+  margin: 12px 0 10px 0;
 }
 .sano-node-content h5 {
   font-size: 0.83em;
-  font-weight: bold;
+  margin: 10px 0 8px 0;
 }
 .sano-node-content h6 {
   font-size: 0.67em;
-  font-weight: bold;
+  margin: 8px 0 6px 0;
 }
 
 .sano-node-content a {
-  color: rgb(96, 197, 255);
+  color: rgb(81, 191, 255);
 }
 .sano-node-content a:hover {
   color: rgb(150, 225, 255);
   text-decoration: underline;
+}
+
+.sano-node-content table tr th, .sano-node-content table tr td {
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  padding: 8px;
+}
+.sano-node-content table {
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-collapse: collapse;
 }
