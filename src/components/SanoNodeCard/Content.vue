@@ -18,12 +18,16 @@ const props = defineProps({
 </script>
 
 <template>
-  <div class="sano-node-content pt-4 pb-1 text-gray-50">
-    <div v-if="props.sanoNode.type === 'text'">
+  <div class="pt-4 pb-1 text-gray-50">
+    <div
+      v-if="props.sanoNode.type === 'text'"
+      class="sano-node-content sano-node-content-text"
+    >
       {{ props.sanoNode.content }}
     </div>
     <div
       v-else-if="props.sanoNode.type === 'md'"
+      class="sano-node-content sano-node-content-md"
       v-html="props.sanoNode.content"
     />
   </div>
