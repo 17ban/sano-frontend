@@ -8,6 +8,7 @@ specifiers:
   '@typescript-eslint/eslint-plugin': ^4.26.1
   '@vitejs/plugin-vue': ^1.2.3
   '@vue/compiler-sfc': ^3.0.5
+  '@vueuse/core': ^5.0.2
   autoprefixer: '9'
   dayjs: ^1.10.4
   eslint: 7.28.0
@@ -21,6 +22,7 @@ specifiers:
   vue-tsc: ^0.0.24
 
 dependencies:
+  '@vueuse/core': 5.0.2_vue@3.0.11
   dayjs: 1.10.5
   highlight.js: 11.0.1
   vue: 3.0.11
@@ -634,6 +636,25 @@ packages:
 
   /@vue/shared/3.0.11:
     resolution: {integrity: sha512-b+zB8A2so8eCE0JsxjL24J7vdGl8rzPQ09hZNhystm+KqSbKcAej1A+Hbva1rCMmTTqA+hFnUSDc5kouEo0JzA==}
+
+  /@vueuse/core/5.0.2_vue@3.0.11:
+    resolution: {integrity: sha512-Sp9+7AL4Cg3Tx6I55WoH7zICGRlp6ZUF9NW3EU8SZTkryHm0afAjFfASMwlfV030JFeh45BdqafDOrenVmM9Cw==}
+    dependencies:
+      '@vueuse/shared': 5.0.2_vue@3.0.11
+      vue-demi: 0.9.1_vue@3.0.11
+    transitivePeerDependencies:
+      - '@vue/composition-api'
+      - vue
+    dev: false
+
+  /@vueuse/shared/5.0.2_vue@3.0.11:
+    resolution: {integrity: sha512-S1hRRmEdipjTD4DbXgPdw4ZZYebU/nDi75vNP3Ibpa1irW3NUNUKOT/TWnwRHLQvXquUtdvalhI8D9Db+czZJg==}
+    dependencies:
+      vue-demi: 0.9.1_vue@3.0.11
+    transitivePeerDependencies:
+      - '@vue/composition-api'
+      - vue
+    dev: false
 
   /acorn-jsx/5.3.1_acorn@7.4.1:
     resolution: {integrity: sha512-K0Ptm/47OKfQRpNQ2J/oIN/3QYiK6FwW+eJbILhsdxh2WTLdl+30o8aGdTbm5JbffpFFAg/g+zi1E+jvJha5ng==}
@@ -3123,6 +3144,20 @@ packages:
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
+
+  /vue-demi/0.9.1_vue@3.0.11:
+    resolution: {integrity: sha512-7s1lufRD2l369eFWPjgLvhqCRk0XzGWJsQc7K4q+0mZtixyGIvsK1Cg88P4NcaRIEiBuuN4q1NN4SZKFKwQswA==}
+    hasBin: true
+    requiresBuild: true
+    peerDependencies:
+      '@vue/composition-api': ^1.0.0-beta.1
+      vue: ^2.6.0 || >=3.0.0-rc.1
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
+    dependencies:
+      vue: 3.0.11
+    dev: false
 
   /vue-eslint-parser/7.6.0_eslint@7.28.0:
     resolution: {integrity: sha512-QXxqH8ZevBrtiZMZK0LpwaMfevQi9UL7lY6Kcp+ogWHC88AuwUPwwCIzkOUc1LR4XsYAt/F9yHXAB/QoD17QXA==}

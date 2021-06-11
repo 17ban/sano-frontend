@@ -18,6 +18,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  displayIndex: {
+    type: Boolean,
+    default: true,
+  },
 })
 </script>
 
@@ -26,7 +30,10 @@ const props = defineProps({
     <span class="inline-block pr-3 text-gray-300 select-all">
       {{ dayjs(props.sanoNode.time).format('YYYY/MM/DD HH:mm:ss') }}
     </span>
-    <span class="inline-block pr-3 text-blue-300 select-all">
+    <span
+      v-if="props.displayIndex"
+      class="inline-block pr-3 text-blue-300 select-all"
+    >
       {{ `#${props.isMain ? 0 : props.sanoNode.index + 1}` }}
     </span>
     <span class="inline-block text-pink-300 select-all">

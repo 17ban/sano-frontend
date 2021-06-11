@@ -74,7 +74,7 @@ async function postNewNode(event: Event): Promise<boolean> {
             </svg>
           </div>
           <textarea
-            class="h-40 py-2 px-4 resize-none bg-gray-600 placeholder-gray-400 text-gray-50 rounded-xl shadow-in appearance-none w-full block pl-9 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-75"
+            class="h-48 py-2 px-4 resize-none bg-gray-600 placeholder-gray-400 text-gray-50 rounded-xl shadow-in appearance-none w-full block pl-9 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-75"
             placeholder="Content*"
             name="content"
             required

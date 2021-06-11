@@ -19,6 +19,14 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  displayIndex: {
+    type: Boolean,
+    default: true,
+  },
+  displayNewNodeBtn: {
+    type: Boolean,
+    default: true,
+  },
 })
 
 const { store: cardStore } = useSanoNodeCardStore()
@@ -38,6 +46,7 @@ function formSubmitHandler() {
       :card-store="cardStore"
       :sano-node="props.sanoNode"
       :is-main="props.isMain"
+      :display-index="props.displayIndex"
     />
     <Content
       :card-store="cardStore"
@@ -48,6 +57,7 @@ function formSubmitHandler() {
       :card-store="cardStore"
       :sano-node="props.sanoNode"
       :is-main="props.isMain"
+      :display-new-node-btn="props.displayNewNodeBtn"
     />
     <NewNodeForm
       :card-store="cardStore"

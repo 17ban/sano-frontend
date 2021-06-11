@@ -18,6 +18,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  displayNewNodeBtn: {
+    type: Boolean,
+    default: true,
+  },
 })
 
 const router = useRouter()
@@ -32,7 +36,7 @@ const router = useRouter()
       'flex-row': !props.isMain
     }"
   >
-    <!-- new node form button -->
+    <!-- new node button -->
     <div
       class="flex-grow flex items-center"
       :class="{
@@ -41,13 +45,12 @@ const router = useRouter()
       }"
     >
       <button
+        v-if="props.displayNewNodeBtn"
         class="p-2 mr-2 bg-gray-600 text-gray-50 rounded-2xl shadow-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-75"
         :title="`New node on ${props.sanoNode.nid}`"
         @click="cardStore.toggleForm"
       >
-        <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-          <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
-        </svg>
+        <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" /></svg>
       </button>
     </div>
 
@@ -62,9 +65,7 @@ const router = useRouter()
           :href="`/node/${props.sanoNode.parent}`"
           @click.prevent="router.push(`/node/${props.sanoNode.parent}`)"
         >
-          <svg class="w-4 h-4 inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd" />
-          </svg>
+          <svg class="w-4 h-4 inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd" /></svg>
         </a>
       </div>
     </div>
