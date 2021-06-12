@@ -1,6 +1,5 @@
 {
   "volar.tsPlugin": true,
-  "deno.enable": true,
   "cSpell.words": [
     "antfu",
     "compat",
@@ -9,7 +8,10 @@
     "nids",
     "nodebundle",
     "sano",
+    "stylelint",
     "tailwindcss",
     "vueuse"
-  ]
+  ],
+  "css.validate": false, // Disable css built-in lint
+  "stylelint.enable": true, // Enable sytlelint
 }

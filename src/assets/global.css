@@ -1,6 +1,6 @@
 body {
   background-attachment: fixed;
-  background-color: rgba(99, 130, 143, 0.7)
+  background-color: rgba(95, 130, 145, 0.7);
 }
 
 footer {
@@ -9,14 +9,4 @@ footer {
   background: -moz-linear-gradient(rgb(33, 33, 33, 0), rgb(33, 33, 33, 0.8));
   background: -mos-linear-gradient(rgb(33, 33, 33, 0), rgb(33, 33, 33, 0.8));
   background: linear-gradient(rgb(33, 33, 33, 0), rgb(33, 33, 33, 0.8));
-}
-
-.selection-dark *::selection {
-  background: #4b5669;
-}
-.selection-gray *::selection {
-  background: #c9cbcf;
-}
-.selection-deep-gray *::selection {
-  background: #5f6c83;
 }

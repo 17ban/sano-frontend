@@ -1,19 +1,23 @@
 .sano-node-content-text {
   white-space: pre-wrap;
 }
+
 .sano-node-content-md p {
   margin: 16px 0;
 }
+
 .sano-node-content-md ol {
   margin: 16px 0;
   padding: 0 0 0 40px;
   list-style: decimal;
 }
+
 .sano-node-content-md ul {
   margin: 16px 0;
   padding: 0 0 0 40px;
   list-style: disc;
 }
+
 .sano-node-content-md blockquote {
   margin: 16px 0;
   padding: 0 16px;
@@ -21,87 +25,103 @@
   border-left: 4px solid rgba(43, 255, 149, 0.6);
   background-color: rgba(0, 0, 0, 0.15);
 }
+
 .sano-node-content-md img {
   display: inline;
 }
 
-/* code block */
 .sano-node-content-md code {
-  padding: 0.2em 0.5em;
+  padding: 0.1em 0.4em;
   border-radius: 4px;
-  color: rgb(209, 213, 223);
-  background-color: rgba(45, 53, 78, 0.8);
+  color: rgb(88, 230, 170);
+  background-color: rgba(45, 50, 80, 0.6);
 }
+
 .sano-node-content-md pre {
   margin: 4px 0;
   padding: 10px 12px;
   border-radius: 4px;
   background-color: rgba(45, 53, 78, 0.8);
 }
+
 .sano-node-content-md pre *::selection {
   background: rgba(255, 255, 255, 0.25);
 }
+
 .sano-node-content-md pre code {
   @apply pretty-scrollbar;
+
   padding-top: 5px;
   max-height: 500px;
   display: block;
+  color: rgb(200, 210, 220);
   white-space: pre;
   overflow: scroll;
   background-color: rgba(0, 0, 0, 0);
 }
+
 .sano-node-content-md pre code .hljs-comment {
   color: rgb(124, 131, 151);
 }
 
-/* heading */
-.sano-node-content-md h1, .sano-node-content-md h2, .sano-node-content-md h3,
-.sano-node-content-md h4, .sano-node-content-md h5, .sano-node-content-md h6 {
+.sano-node-content-md h1,
+.sano-node-content-md h2,
+.sano-node-content-md h3,
+.sano-node-content-md h4,
+.sano-node-content-md h5,
+.sano-node-content-md h6 {
   font-weight: bold;
 }
+
 .sano-node-content-md h1 {
   font-size: 2em;
   margin: 22px 0 18px 0;
   padding-bottom: 2px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.4);
 }
+
 .sano-node-content-md h2 {
   font-size: 1.5em;
   margin: 18px 0 14px 0;
   padding-bottom: 2px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.4);
 }
+
 .sano-node-content-md h3 {
   font-size: 1.17em;
   margin: 16px 0 14px 0;
 }
+
 .sano-node-content-md h4 {
   font-size: 1em;
   margin: 12px 0 10px 0;
 }
+
 .sano-node-content-md h5 {
   font-size: 0.83em;
   margin: 10px 0 8px 0;
 }
+
 .sano-node-content-md h6 {
   font-size: 0.67em;
   margin: 8px 0 6px 0;
 }
 
-/* link */
 .sano-node-content-md a {
-  color: rgb(81, 191, 255);
+  color: rgb(60, 200, 255);
 }
+
 .sano-node-content-md a:hover {
-  color: rgb(150, 225, 255);
+  color: rgb(115, 215, 255);
   text-decoration: underline;
 }
 
-/* table */
-.sano-node-content-md table tr th, .sano-node-content-md table tr td {
+.sano-node-content-md table tr th,
+.sano-node-content-md table tr td {
   border: 1px solid rgba(255, 255, 255, 0.4);
   padding: 8px;
 }
+
 .sano-node-content-md table {
   border: 1px solid rgba(255, 255, 255, 0.4);
   border-collapse: collapse;
