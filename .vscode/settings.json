@@ -5,6 +5,7 @@
     "antfu",
     "compat",
     "dompurify",
+    "hljs",
     "nids",
     "nodebundle",
     "sano",

@@ -1,36 +1,6 @@
 .sano-node-content-text {
   white-space: pre-wrap;
 }
-
-.sano-node-content-md pre {
-  margin: 4px 0;
-  padding: 10px 12px;
-  background-color: rgba(47, 55, 77, 0.8);
-  border-radius: 4px;
-  white-space: pre;
-}
-.sano-node-content-md pre *::selection {
-  background: rgba(255, 255, 255, 0.25);
-}
-.sano-node-content-md pre code {
-  padding-top: 5px;
-  max-height: 500px;
-  background-color: rgba(0, 0, 0, 0);
-  display: block;
-  overflow: scroll;
-}
-.sano-node-content-md pre code::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
-  background: 0 0;
-}
-.sano-node-content-md pre code::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.4);
-}
-.sano-node-content-md pre code::-webkit-scrollbar-corner{
-  background: rgba(0, 0, 0, 0);
-}
-
 .sano-node-content-md p {
   margin: 16px 0;
 }
@@ -51,11 +21,50 @@
   border-left: 4px solid rgba(43, 255, 149, 0.6);
   background-color: rgba(0, 0, 0, 0.15);
 }
-
 .sano-node-content-md img {
   display: inline;
 }
 
+/* code block */
+.sano-node-content-md code {
+  padding: 0.2em 0.5em;
+  border-radius: 4px;
+  color: rgb(209, 213, 223);
+  background-color: rgba(45, 53, 78, 0.8);
+}
+.sano-node-content-md pre {
+  margin: 4px 0;
+  padding: 10px 12px;
+  border-radius: 4px;
+  background-color: rgba(45, 53, 78, 0.8);
+}
+.sano-node-content-md pre *::selection {
+  background: rgba(255, 255, 255, 0.25);
+}
+.sano-node-content-md pre code {
+  padding-top: 5px;
+  max-height: 500px;
+  display: block;
+  white-space: pre;
+  overflow: scroll;
+  background-color: rgba(0, 0, 0, 0);
+}
+.sano-node-content-md pre code .hljs-comment {
+  color: rgb(124, 131, 151);
+}
+.sano-node-content-md pre code::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+  background: 0 0;
+}
+.sano-node-content-md pre code::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.4);
+}
+.sano-node-content-md pre code::-webkit-scrollbar-corner{
+  background: rgba(0, 0, 0, 0);
+}
+
+/* heading */
 .sano-node-content-md h1, .sano-node-content-md h2, .sano-node-content-md h3,
 .sano-node-content-md h4, .sano-node-content-md h5, .sano-node-content-md h6 {
   font-weight: bold;
@@ -89,6 +98,7 @@
   margin: 8px 0 6px 0;
 }
 
+/* link */
 .sano-node-content-md a {
   color: rgb(81, 191, 255);
 }
@@ -97,6 +107,7 @@
   text-decoration: underline;
 }
 
+/* table */
 .sano-node-content-md table tr th, .sano-node-content-md table tr td {
   border: 1px solid rgba(255, 255, 255, 0.4);
   padding: 8px;
