@@ -42,6 +42,7 @@
   background: rgba(255, 255, 255, 0.25);
 }
 .sano-node-content-md pre code {
+  @apply pretty-scrollbar;
   padding-top: 5px;
   max-height: 500px;
   display: block;
@@ -51,17 +52,6 @@
 }
 .sano-node-content-md pre code .hljs-comment {
   color: rgb(124, 131, 151);
-}
-.sano-node-content-md pre code::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
-  background: 0 0;
-}
-.sano-node-content-md pre code::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.4);
-}
-.sano-node-content-md pre code::-webkit-scrollbar-corner{
-  background: rgba(0, 0, 0, 0);
 }
 
 /* heading */

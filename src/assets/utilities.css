@@ -1,0 +1,18 @@
+.shadow-in {
+  box-shadow: 2px 2px 6px #444d5a inset
+}
+.pointer-text {
+  cursor: text;
+}
+
+.pretty-scrollbar::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+  background-color: rgba(0, 0, 0, 0);
+}
+.pretty-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+.pretty-scrollbar::-webkit-scrollbar-corner {
+  background-color: rgba(0, 0, 0, 0);
+}

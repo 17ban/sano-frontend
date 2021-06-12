@@ -56,28 +56,30 @@ async function postNewNode(event: Event): Promise<boolean> {
     :class="{ invisible: !props.cardStore.formVisible, 'opacity-50': !props.cardStore.formVisible, 'max-h-0': !props.cardStore.formVisible, 'max-h-96': props.cardStore.formVisible, 'mt-4': props.cardStore.formVisible, 'mt-0': !props.cardStore.formVisible }"
   >
     <div class="p-1 flex flex-col space-y-3">
-      <h1 class="px-3.5 py-1 text-xl text-gray-100">
+      <strong class="px-3.5 py-1 text-2xl text-gray-100">
         New node on
         <span class="text-pink-300">
           {{ sanoNode.nid }}
         </span>
-      </h1>
+      </strong>
       <form
         class="flex-grow flex flex-col space-y-5"
         @submit.prevent="postNewNode"
       >
-        <div class="relative text-gray-400 focus-within:text-gray-50 selection-deep-gray">
+        <div class="relative text-gray-400 selection-deep-gray focus-within:text-gray-50">
           <div class="absolute inset-y-0 left-0 pl-3 pt-3 pointer-events-none">
             <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
               <path fill-rule="evenodd" d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z" clip-rule="evenodd" />
             </svg>
           </div>
-          <textarea
-            class="h-48 py-2 px-4 resize-none bg-gray-600 placeholder-gray-400 text-gray-50 rounded-xl shadow-in appearance-none w-full block pl-9 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-75"
-            placeholder="Content*"
-            name="content"
-            required
-          ></textarea>
+          <div class="w-full h-48 py-2 pr-3 bg-gray-600 rounded-xl shadow-in focus-within:ring-2 focus-within:ring-gray-400 focus-within:ring-opacity-75">
+            <textarea
+              class="pr-3 pl-9 h-full bg-gray-600 pretty-scrollbar resize-none placeholder-gray-400 text-gray-50 appearance-none w-full outline-none"
+              placeholder="Content*"
+              name="content"
+              required
+            />
+          </div>
         </div>
         <div class="relative text-gray-400 focus-within:text-gray-50 selection-deep-gray">
           <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -107,9 +109,3 @@ async function postNewNode(event: Event): Promise<boolean> {
     </div>
   </div>
 </template>
-
-<style>
-.shadow-in {
-  box-shadow: 2px 2px 6px #444d5a inset
-}
-</style>
