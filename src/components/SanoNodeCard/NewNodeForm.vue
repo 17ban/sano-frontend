@@ -63,7 +63,6 @@ async function postNewNode(event: Event): Promise<boolean> {
         </span>
       </h1>
       <form
-        :id="`new-node-form-${sanoNode.nid}`"
         class="flex-grow flex flex-col space-y-5"
         @submit.prevent="postNewNode"
       >
