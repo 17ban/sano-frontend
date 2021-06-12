@@ -14,13 +14,12 @@ const props = defineProps({
     type: Object as PropType<SanoNode>,
     required: true,
   },
-  isMain: {
-    type: Boolean,
-    default: false,
-  },
   displayIndex: {
     type: Boolean,
     default: true,
+  },
+  shownIndex: {
+    type: String,
   },
 })
 </script>
@@ -31,10 +30,10 @@ const props = defineProps({
       {{ dayjs(props.sanoNode.time).format('YYYY/MM/DD HH:mm:ss') }}
     </span>
     <span
-      v-if="props.displayIndex"
+      v-if="props.shownIndex && props.displayIndex"
       class="inline-block pr-3 text-blue-300 select-all"
     >
-      {{ `#${props.isMain ? 0 : props.sanoNode.index + 1}` }}
+      {{ '#' + props.shownIndex }}
     </span>
     <span class="inline-block text-pink-300 select-all">
       {{ props.sanoNode.nid }}

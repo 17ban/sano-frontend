@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineProps, defineEmit } from 'vue'
+import { defineProps, defineEmit, computed } from 'vue'
 import type { PropType } from 'vue'
 
 import Meta from './Meta.vue'
@@ -31,6 +31,10 @@ const props = defineProps({
 
 const { store: cardStore } = useSanoNodeCardStore()
 
+const shownIndex = computed<string>(() => {
+  return `${props.isMain ? 0 : props.sanoNode.index + 1}`
+})
+
 const emitPostNewNode = defineEmit<(e: 'postNewNode') => void>()
 function formSubmitHandler() {
   emitPostNewNode('postNewNode')
@@ -39,13 +43,13 @@ function formSubmitHandler() {
 
 <template>
   <div
-    :id="`nid-${props.sanoNode.nid}`"
+    :id="props.displayIndex ? shownIndex : undefined"
     class="px-5 py-3 bg-gray-500 rounded-lg"
   >
     <Meta
       :card-store="cardStore"
       :sano-node="props.sanoNode"
-      :is-main="props.isMain"
+      :shown-index="shownIndex"
       :display-index="props.displayIndex"
     />
     <Content
