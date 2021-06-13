@@ -37,7 +37,18 @@ async function refreshNodes() {
 
 <template>
   <div
-    v-if="mainNode"
+    v-if="!mainNode"
+    class="min-h-screen mt-10 mb-36 text-center"
+  >
+    <p class="pt-10 text-7xl font-bold text-purple-200">
+      Unkown Node
+    </p>
+    <p class="pt-10 text-8xl font-bold text-pink-200">
+      {{ nid }}
+    </p>
+  </div>
+  <div
+    v-else
     :key="mainNode.nid"
   >
     <!-- main node -->
