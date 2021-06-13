@@ -1,15 +1,12 @@
 <script setup lang="ts">
-import { computed, ref, watchEffect } from 'vue'
-import { getNodes, ensureNodes } from '~/store/nodes-cache'
-import type { Nid } from '~/types'
+import { ref, watchEffect } from 'vue'
+import { useNodes, ensureNodes } from '~/store/nodes-cache'
+import type { SanoNid } from '~/types'
 
 import SanoNodeCard from '~/components/SanoNodeCard/index.vue'
 
-const highlightNodeNids = ref<Nid[]>(['ROOT', 'TEST', 'T1Z8'])
-const highlightNodes = computed(() => {
-  const nodes = getNodes(highlightNodeNids.value)
-  return nodes.value
-})
+const highlightNodeNids = ref<SanoNid[]>(['ROOT', 'TEST', 'T1Z8'])
+const highlightNodes = useNodes(highlightNodeNids)
 
 watchEffect(async() => {
   await ensureNodes(highlightNodeNids.value)

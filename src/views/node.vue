@@ -1,31 +1,20 @@
 <script setup lang="ts">
-import { watchEffect, computed } from 'vue'
+import { computed, watch } from 'vue'
 import { useRoute } from 'vue-router'
 
-import { getNodeBundle, ensureNodeBundle } from '~/store/nodes-cache'
+import { useNodeBundle, ensureNodeBundle } from '~/store/nodes-cache'
 
 import SanoNodeCard from '~/components/SanoNodeCard/index.vue'
 
 const route = useRoute()
-
 const nid = computed(() => route.params.nid as (string | undefined))
+const nodeBundle = useNodeBundle(nid)
+const mainNode = computed(() => nodeBundle.value?.mainNode)
+const childNodes = computed(() => nodeBundle.value ? nodeBundle.value.childNodes : [])
 
-watchEffect(async() => {
-  if (!nid.value)
-    return
-  await ensureNodeBundle(nid.value)
-  window.scroll(0, 0)
+watch(nodeBundle, () => {
+  window.scrollTo(0, 0)
 })
-
-const nodeBundle = computed(() => {
-  if (!nid.value)
-    return null
-  return getNodeBundle(nid.value)
-})
-
-const mainNode = computed(() => nodeBundle.value ? nodeBundle.value.mainNode.value : undefined)
-
-const childNodes = computed(() => nodeBundle.value ? nodeBundle.value.childNodes.value : [])
 
 async function refreshNodes() {
   if (!nid.value)
@@ -50,6 +39,7 @@ async function refreshNodes() {
   <div
     v-else
     :key="mainNode.nid"
+    class="min-h-screen"
   >
     <!-- main node -->
     <div :key="mainNode.nid" class="py-4">
