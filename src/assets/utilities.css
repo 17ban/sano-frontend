@@ -7,19 +7,22 @@
 }
 
 .pretty-scrollbar {
-  &::-webkit-scrollbar {
-    width: 5px;
-    height: 5px;
-    background-color: rgba(0, 0, 0, 0);
-  }
+  overflow: scroll;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.4) rgba(0, 0, 0, 0);
+}
 
-  &::-webkit-scrollbar-thumb {
-    background-color: rgba(255, 255, 255, 0.4);
-  }
+.pretty-scrollbar::-webkit-scrollbar {
+  width: 5px;
+  background-color: rgba(0, 0, 0, 0);
+}
 
-  &::-webkit-scrollbar-corner {
-    background-color: rgba(0, 0, 0, 0);
-  }
+.pretty-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.pretty-scrollbar::-webkit-scrollbar-corner {
+  background-color: rgba(0, 0, 0, 0);
 }
 
 .selection-dark *::selection {
