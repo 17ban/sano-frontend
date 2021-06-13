@@ -10,12 +10,14 @@
     "@vueuse/core": "^5.0.2",
     "dayjs": "^1.10.5",
     "highlight.js": "^11.0.1",
+    "nprogress": "^0.2.0",
     "vue": "^3.1.1",
     "vue-router": "^4.0.8"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.6.6",
     "@types/node": "^15.12.2",
+    "@types/nprogress": "^0.2.0",
     "@typescript-eslint/eslint-plugin": "^4.26.1",
     "@vitejs/plugin-vue": "^1.2.3",
     "@vue/compiler-sfc": "^3.1.1",
