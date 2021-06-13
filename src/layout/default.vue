@@ -1,11 +1,20 @@
 <script script setup lang="ts">
-import { computed } from 'vue'
+import { computed, watch, ref } from 'vue'
 import { useRoute } from 'vue-router'
 
 import SearchBar from '~/components/SearchBar.vue'
+import { delay } from '~/utils'
 
 const route = useRoute()
 const nid = computed(() => route.params.nid as (string | undefined))
+
+const visible = ref(true)
+
+watch(() => route.path, async() => {
+  visible.value = false
+  await delay(300)
+  visible.value = true
+})
 </script>
 
 <template>
@@ -16,14 +25,24 @@ const nid = computed(() => route.params.nid as (string | undefined))
         <SearchBar :nid="nid" placeholder="Node ID" />
       </div>
       <!-- page -->
-      <div>
-        <router-view />
-      </div>
+      <router-view v-slot="{ Component }">
+        <component :is="Component" />
+      </router-view>
     </div>
-    <footer class="h-screen mt-36 flex flex-row items-center">
+    <div class="layout-default-footer h-screen mt-36 flex flex-row items-center">
       <h1 class="flex-grow font-bold text-purple-300 text-7xl text-center">
         Sano
       </h1>
-    </footer>
+    </div>
   </div>
 </template>
+
+<style>
+.layout-default-footer {
+  background: -webkit-linear-gradient(rgb(33, 33, 33, 0), rgb(33, 33, 33, 0.8));
+  background: -o-linear-gradient(rgb(33, 33, 33, 0), rgb(33, 33, 33, 0.8));
+  background: -moz-linear-gradient(rgb(33, 33, 33, 0), rgb(33, 33, 33, 0.8));
+  background: -mos-linear-gradient(rgb(33, 33, 33, 0), rgb(33, 33, 33, 0.8));
+  background: linear-gradient(rgb(33, 33, 33, 0), rgb(33, 33, 33, 0.8));
+}
+</style>

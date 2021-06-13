@@ -2,11 +2,3 @@ body {
   background-attachment: fixed;
   background-color: rgba(95, 130, 145, 0.7);
 }
-
-footer {
-  background: -webkit-linear-gradient(rgb(33, 33, 33, 0), rgb(33, 33, 33, 0.8));
-  background: -o-linear-gradient(rgb(33, 33, 33, 0), rgb(33, 33, 33, 0.8));
-  background: -moz-linear-gradient(rgb(33, 33, 33, 0), rgb(33, 33, 33, 0.8));
-  background: -mos-linear-gradient(rgb(33, 33, 33, 0), rgb(33, 33, 33, 0.8));
-  background: linear-gradient(rgb(33, 33, 33, 0), rgb(33, 33, 33, 0.8));
-}

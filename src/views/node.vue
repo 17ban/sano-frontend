@@ -13,8 +13,8 @@ const nid = computed(() => route.params.nid as (string | undefined))
 watchEffect(async() => {
   if (!nid.value)
     return
-  window.scroll(0, 0)
   await ensureNodeBundle(nid.value)
+  window.scroll(0, 0)
 })
 
 const nodeBundle = computed(() => {
