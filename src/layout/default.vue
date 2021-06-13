@@ -1,20 +1,11 @@
-<script script setup lang="ts">
-import { computed, watch, ref } from 'vue'
+<script setup lang="ts">
+import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 
 import SearchBar from '~/components/SearchBar.vue'
-import { delay } from '~/utils'
 
 const route = useRoute()
 const nid = computed(() => route.params.nid as (string | undefined))
-
-const visible = ref(true)
-
-watch(() => route.path, async() => {
-  visible.value = false
-  await delay(300)
-  visible.value = true
-})
 </script>
 
 <template>
