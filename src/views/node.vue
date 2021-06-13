@@ -1,65 +1,44 @@
 <script setup lang="ts">
-import { watchEffect, ref, computed } from 'vue'
+import { watchEffect, computed } from 'vue'
 import { useRoute } from 'vue-router'
 
-import { delay } from '~/utils/index'
-import type { SanoNode } from '~/types'
-import { getNode, getNodes, cacheNodeBundle } from '~/store/nodes-cache'
+import { getNodeBundle, ensureNodeBundle } from '~/store/nodes-cache'
 
 import SanoNodeCard from '~/components/SanoNodeCard/index.vue'
 
 const route = useRoute()
-const nid = computed(() => route.params.nid as (string | undefined))
-const pageStatus = ref<'loading' | 'loaded'>('loading')
-const mainNode = ref<SanoNode | undefined>()
-const childNodes = ref<SanoNode[]>([])
 
-async function updateNodes() {
-  if (!nid.value) {
-    mainNode.value = undefined
-    childNodes.value = []
-    return false
-  }
-  mainNode.value = await getNode(nid.value)
-  if (!mainNode.value) {
-    childNodes.value = []
-    return false
-  }
-  const _childNodes: SanoNode[] = []
-  const childNodesMap = await getNodes(mainNode.value.children)
-  for (const nid of mainNode.value.children) {
-    const n = childNodesMap[nid]
-    if (n)
-      _childNodes.push(n)
-  }
-  childNodes.value = _childNodes
-  return true
-}
+const nid = computed(() => route.params.nid as (string | undefined))
+
+watchEffect(async() => {
+  if (!nid.value)
+    return
+  window.scroll(0, 0)
+  await ensureNodeBundle(nid.value)
+})
+
+const nodeBundle = computed(() => {
+  if (!nid.value)
+    return null
+  return getNodeBundle(nid.value)
+})
+
+const mainNode = computed(() => nodeBundle.value ? nodeBundle.value.mainNode.value : undefined)
+
+const childNodes = computed(() => nodeBundle.value ? nodeBundle.value.childNodes.value : [])
 
 async function refreshNodes() {
   if (!nid.value)
     return false
-  await cacheNodeBundle(nid.value)
-  await updateNodes()
+  await ensureNodeBundle(nid.value, true)
   return true
 }
-
-watchEffect(async() => {
-  pageStatus.value = 'loading'
-  window.scroll(0, 0)
-  await updateNodes()
-  await delay() // Animation doesn't work without this line.
-  pageStatus.value = 'loaded'
-  document.title = `${nid.value || 'Home'} - Sano`
-})
 </script>
 
 <template>
   <div
     v-if="mainNode"
     :key="mainNode.nid"
-    :class="{ 'opacity-0': pageStatus !== 'loaded' }"
-    class="transition-all duration-500"
   >
     <!-- main node -->
     <div :key="mainNode.nid" class="py-4">
