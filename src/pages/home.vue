@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { ref, watchEffect } from 'vue'
+import { ref } from 'vue'
 import NProgress from 'nprogress'
-import { useNodes, ensureNodes } from '~/store/cache'
+import { useNodes } from '~/store/cache'
 import type { SanoNid } from '~/types'
 
 import SanoNodeCard from '~/components/SanoNodeCard/index.vue'
@@ -12,10 +12,6 @@ const highlightNodes = useNodes(
   () => { NProgress.start() },
   () => { NProgress.done() },
 )
-
-watchEffect(async() => {
-  await ensureNodes(highlightNodeNids.value)
-})
 </script>
 
 <template>

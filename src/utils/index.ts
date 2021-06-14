@@ -31,3 +31,24 @@ export function scrollIntoElement(selector: string) {
   if (element)
     element.scrollIntoView({ behavior: 'smooth' })
 }
+
+type SyncOrAsyncFunc<T = void> = () => T | PromiseLike<T>
+
+function objectIsPromiseLike<T = any>(object: PromiseLike<T> | object): object is PromiseLike<T> {
+  if (object instanceof Object)
+    return (object as PromiseLike<T>).then instanceof Function
+  return false
+}
+
+export async function execSyncOrAsyncFunc<T>(func: SyncOrAsyncFunc<T>) {
+  const promiseOrValue = func()
+  if (promiseOrValue instanceof Object && objectIsPromiseLike(promiseOrValue))
+    return await promiseOrValue
+  else
+    return promiseOrValue
+}
+
+export async function tryFunc<T>(func?: SyncOrAsyncFunc<T>) {
+  if (func)
+    return await execSyncOrAsyncFunc(func)
+}
