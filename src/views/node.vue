@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, watch } from 'vue'
 import { useRoute } from 'vue-router'
+import NProgress from 'nprogress'
 
 import { useNodeBundle, ensureNodeBundle } from '~/store/nodes-cache'
 
@@ -8,7 +9,11 @@ import SanoNodeCard from '~/components/SanoNodeCard/index.vue'
 
 const route = useRoute()
 const nid = computed(() => route.params.nid as (string | undefined))
-const nodeBundle = useNodeBundle(nid)
+const nodeBundle = useNodeBundle(
+  nid,
+  () => { NProgress.start() },
+  () => { NProgress.done() },
+)
 const mainNode = computed(() => nodeBundle.value?.mainNode)
 const childNodes = computed(() => nodeBundle.value ? nodeBundle.value.childNodes : [])
 

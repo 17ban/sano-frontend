@@ -90,18 +90,23 @@ export async function ensureNodeBundle<NID extends SanoNid>(nid: NID, refresh = 
   return { mainNode, childNodes }
 }
 
-export function useNode<NID extends SanoNid>(nid: NID | Ref<NID | undefined>) {
+export function useNode<NID extends SanoNid>(nid: NID | Ref<NID | undefined>, beforeUpdate?: () => any, afterUpdate?: () => any) {
   return asyncComputed(async() => {
+    beforeUpdate?.()
     const _nid = isRef(nid) ? nid.value : nid
-    if (!_nid)
+    if (!_nid) {
+      afterUpdate?.()
       return undefined
+    }
     await ensureNode(_nid)
+    afterUpdate?.()
     return cachedSanoNodeMap.value[_nid]
   }, undefined)
 }
 
-export function useNodes<NID extends SanoNid>(nids: NID[] | Ref<NID[]>) {
+export function useNodes<NID extends SanoNid>(nids: NID[] | Ref<NID[]>, beforeUpdate?: () => any, afterUpdate?: () => any) {
   return asyncComputed(async() => {
+    beforeUpdate?.()
     const _nids = isRef(nids) ? nids.value : nids
     await ensureNodes(_nids)
     const nodes = []
@@ -109,24 +114,31 @@ export function useNodes<NID extends SanoNid>(nids: NID[] | Ref<NID[]>) {
       const node = cachedSanoNodeMap.value[nid]
       if (node) nodes.push(node)
     }
+    afterUpdate?.()
     return nodes
   }, [])
 }
 
-export function useNodeBundle<NID extends SanoNid>(nid: NID | Ref<NID | undefined>) {
+export function useNodeBundle<NID extends SanoNid>(nid: NID | Ref<NID | undefined>, beforeUpdate?: () => any, afterUpdate?: () => any) {
   return asyncComputed(async() => {
+    beforeUpdate?.()
     const _nid = isRef(nid) ? nid.value : nid
-    if (!_nid)
+    if (!_nid) {
+      afterUpdate?.()
       return undefined
+    }
     await ensureNodeBundle(_nid)
     const mainNode = cachedSanoNodeMap.value[_nid]
-    if (!mainNode)
+    if (!mainNode) {
+      afterUpdate?.()
       return undefined
+    }
     const childNodes = []
     for (const childNids of mainNode.children) {
       const childNode = cachedSanoNodeMap.value[childNids]
       if (childNode) childNodes.push(childNode)
     }
+    afterUpdate?.()
     return { mainNode, childNodes }
   }, undefined)
 }
