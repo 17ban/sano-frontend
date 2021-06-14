@@ -17,8 +17,12 @@ const nodeBundle = useNodeBundle(
 const mainNode = computed(() => nodeBundle.value?.mainNode)
 const childNodes = computed(() => nodeBundle.value ? nodeBundle.value.childNodes : [])
 
+let prevNid: string | undefined
 watch(nodeBundle, () => {
-  window.scrollTo(0, 0)
+  if (nid.value !== prevNid) {
+    prevNid = nid.value
+    window.scrollTo(0, 0)
+  }
 })
 
 async function refreshNodes() {
