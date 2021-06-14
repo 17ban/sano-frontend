@@ -3,7 +3,7 @@ import NProgress from 'nprogress'
 import { useNodes } from '~/store/cache'
 import { stickyNids } from '~/store/sticky'
 
-import SanoNodeCard from '~/components/SanoNodeCard/index.vue'
+import NodeCard from '~/components/NodeCard/index.vue'
 
 const stickyNodes = useNodes(
   stickyNids,
@@ -47,7 +47,7 @@ const stickyNodes = useNodes(
       :key="node.nid"
       class="my-4"
     >
-      <SanoNodeCard
+      <NodeCard
         :sano-node="node"
         :is-main="false"
         :display-index="false"

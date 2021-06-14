@@ -1,18 +1,18 @@
 import { reactive } from 'vue'
 
-export interface SanoNodeCardStore {
+export interface NodeCardStore {
   formVisible: boolean
   toggleForm(): void
 }
 
-const createStore = (): SanoNodeCardStore => ({
+const createStore = (): NodeCardStore => ({
   formVisible: false,
   toggleForm() {
     this.formVisible = !this.formVisible
   },
 })
 
-export const useSanoNodeCardStore = () => {
+export const useNodeCardStore = () => {
   const store = reactive(createStore())
   return { store }
 }

@@ -7,7 +7,7 @@ import Content from './Content.vue'
 import Toolbar from './Toolbar.vue'
 import NewNodeForm from './NewNodeForm.vue'
 
-import { useSanoNodeCardStore } from './store'
+import { useNodeCardStore } from './store'
 import type { SanoNode } from '~/types'
 
 const props = defineProps({
@@ -29,7 +29,7 @@ const props = defineProps({
   },
 })
 
-const { store: cardStore } = useSanoNodeCardStore()
+const { store: cardStore } = useNodeCardStore()
 
 const shownIndex = computed<string>(() => {
   return `${props.isMain ? 0 : props.sanoNode.index + 1}`

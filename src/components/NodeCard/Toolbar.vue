@@ -2,12 +2,12 @@
 import { defineProps } from 'vue'
 import type { PropType } from 'vue'
 import { useRouter } from 'vue-router'
-import type { SanoNodeCardStore } from './store'
+import type { NodeCardStore } from './store'
 import type { SanoNode } from '~/types'
 
 const props = defineProps({
   cardStore: {
-    type: Object as PropType<SanoNodeCardStore>,
+    type: Object as PropType<NodeCardStore>,
     required: true,
   },
   sanoNode: {

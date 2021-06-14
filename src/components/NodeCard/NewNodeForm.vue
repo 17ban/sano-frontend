@@ -2,13 +2,13 @@
 import { defineProps, defineEmit } from 'vue'
 import type { PropType } from 'vue'
 
-import type { SanoNodeCardStore } from './store'
+import type { NodeCardStore } from './store'
 import { postNode } from '~/api/node'
 import type { SanoNode } from '~/types'
 
 const props = defineProps({
   cardStore: {
-    type: Object as PropType<SanoNodeCardStore>,
+    type: Object as PropType<NodeCardStore>,
     required: true,
   },
   sanoNode: {

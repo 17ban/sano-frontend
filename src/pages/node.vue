@@ -5,7 +5,7 @@ import NProgress from 'nprogress'
 
 import { useNodeBundle, ensureNodeBundle } from '~/store/cache'
 
-import SanoNodeCard from '~/components/SanoNodeCard/index.vue'
+import NodeCard from '~/components/NodeCard/index.vue'
 import NodeCardLoading from '~/components/NodeCardLoading.vue'
 
 const route = useRoute()
@@ -48,7 +48,7 @@ async function refreshNodes() {
     >
       <!-- main node -->
       <div :key="mainNode.nid" class="py-4">
-        <SanoNodeCard
+        <NodeCard
           :sano-node="mainNode"
           :is-main="true"
           @post-new-node="refreshNodes"
@@ -74,7 +74,7 @@ async function refreshNodes() {
       <!-- child nodes -->
       <template v-for="childNode of childNodes" :key="childNode.nid">
         <div class="my-4">
-          <SanoNodeCard
+          <NodeCard
             :sano-node="childNode"
             @post-new-node="refreshNodes"
           />
