@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, watchEffect } from 'vue'
 import NProgress from 'nprogress'
-import { useNodes, ensureNodes } from '~/store/nodes-cache'
+import { useNodes, ensureNodes } from '~/store/cache'
 import type { SanoNid } from '~/types'
 
 import SanoNodeCard from '~/components/SanoNodeCard/index.vue'

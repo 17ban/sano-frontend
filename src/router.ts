@@ -10,7 +10,7 @@ const router = createRouter({
       children: [
         {
           path: 'home',
-          component: () => import('~/views/home.vue'),
+          component: () => import('~/pages/home.vue'),
         },
       ],
     },
@@ -20,13 +20,13 @@ const router = createRouter({
       children: [
         {
           path: ':nid',
-          component: () => import('~/views/node.vue'),
+          component: () => import('~/pages/node.vue'),
         },
       ],
     },
     {
       path: '/:catchAll(.*)',
-      component: () => import('~/views/err.vue'),
+      component: () => import('~/pages/err.vue'),
     },
   ],
 })

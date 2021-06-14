@@ -1,4 +1,4 @@
-import './assets/index.css'
+import './assets/style/index.css'
 import 'highlight.js/styles/atom-one-dark.css'
 
 import { createApp } from 'vue'

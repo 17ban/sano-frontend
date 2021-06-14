@@ -3,7 +3,7 @@ import { computed, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import NProgress from 'nprogress'
 
-import { useNodeBundle, ensureNodeBundle } from '~/store/nodes-cache'
+import { useNodeBundle, ensureNodeBundle } from '~/store/cache'
 
 import SanoNodeCard from '~/components/SanoNodeCard/index.vue'
 
