@@ -6,6 +6,7 @@ import NProgress from 'nprogress'
 import { useNodeBundle, ensureNodeBundle } from '~/store/cache'
 
 import SanoNodeCard from '~/components/SanoNodeCard/index.vue'
+import NodeCardLoading from '~/components/NodeCardLoading.vue'
 
 const route = useRoute()
 const nid = computed(() => route.params.nid as (string | undefined))
@@ -90,6 +91,27 @@ async function refreshNodes() {
       <p class="pt-10 text-8xl font-bold text-pink-200">
         {{ nid }}
       </p>
+    </div>
+  </div>
+
+  <!-- will be shown while loading -->
+  <div v-else>
+    <div class="py-4">
+      <NodeCardLoading />
+    </div>
+
+    <div class="py-4 flex flex-col items-center">
+      <div class="w-1 h-4 my-2 rounded-md bg-gray-600"></div>
+      <div class="w-1 h-4 my-2 rounded-md bg-gray-600"></div>
+      <div class="w-1 h-4 my-2 rounded-md bg-gray-600"></div>
+    </div>
+
+    <div class="py-4 flex flex-col items-center">
+      <div class="text-center px-5 py-0.5 rounded-2xl shadow-md border-none bg-gray-600">
+        <span class="text-gray-100 text-lg leading-8">
+          No Child Node
+        </span>
+      </div>
     </div>
   </div>
 </template>
