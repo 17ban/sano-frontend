@@ -12,6 +12,10 @@ const router = createRouter({
           path: 'home',
           component: () => import('~/pages/home.vue'),
         },
+        {
+          path: 'unknown',
+          component: () => import('~/pages/unknown.vue'),
+        },
       ],
     },
     {
@@ -27,13 +31,7 @@ const router = createRouter({
     {
       path: '/:catchAll(.*)',
       component: () => import('~/layout/default.vue'),
-      redirect: '/err',
-      children: [
-        {
-          path: '/err',
-          component: () => import('~/pages/err.vue'),
-        },
-      ],
+      redirect: '/unknown',
     },
   ],
 })
