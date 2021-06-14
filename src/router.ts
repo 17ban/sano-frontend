@@ -26,7 +26,14 @@ const router = createRouter({
     },
     {
       path: '/:catchAll(.*)',
-      component: () => import('~/pages/err.vue'),
+      component: () => import('~/layout/default.vue'),
+      redirect: '/err',
+      children: [
+        {
+          path: '/err',
+          component: () => import('~/pages/err.vue'),
+        },
+      ],
     },
   ],
 })
