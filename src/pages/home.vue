@@ -1,14 +1,12 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 import NProgress from 'nprogress'
 import { useNodes } from '~/store/cache'
-import type { SanoNid } from '~/types'
+import { stickyNids } from '~/store/sticky'
 
 import SanoNodeCard from '~/components/SanoNodeCard/index.vue'
 
-const highlightNodeNids = ref<SanoNid[]>(['ROOT', 'TEST', 'T1Z8'])
-const highlightNodes = useNodes(
-  highlightNodeNids,
+const stickyNodes = useNodes(
+  stickyNids,
   () => { NProgress.start() },
   () => { NProgress.done() },
 )
@@ -38,14 +36,14 @@ const highlightNodes = useNodes(
     <div class="py-4 flex flex-col items-center">
       <div class="text-center px-5 py-0.5 rounded-2xl shadow-md border-none bg-gray-600">
         <span class="text-gray-100 text-lg leading-8">
-          {{ highlightNodes.length || 'No' }} Sticky Node{{ highlightNodes.length > 1 ? 's' : '' }}
+          {{ stickyNodes.length || 'No' }} Sticky Node{{ stickyNodes.length > 1 ? 's' : '' }}
         </span>
       </div>
     </div>
 
     <!-- sticky nodes -->
     <div
-      v-for="node of highlightNodes"
+      v-for="node of stickyNodes"
       :key="node.nid"
       class="my-4"
     >

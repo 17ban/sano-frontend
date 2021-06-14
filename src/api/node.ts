@@ -19,6 +19,10 @@ export function getNodes(nids: SanoNid[]): JsonResponsePromise<SanoNode[]> {
   return fetch(`/api/nodes${queryStr(query)}`)
 }
 
+export function getStickyNids(): JsonResponsePromise<SanoNid[]> {
+  return fetch('/api/sticky-nids')
+}
+
 export function getNodeBundle(nid: SanoNid): JsonResponsePromise<SanoNodeBundle> {
   const query = { nid }
   return fetch(`/api/nodebundle${queryStr(query)}`)
