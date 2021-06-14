@@ -1,7 +1,7 @@
 import type {
   SanoNid,
   SanoNode,
-  JsonResponse,
+  JsonResponsePromise,
   SanoNodeBundle,
 } from '../types'
 
@@ -9,22 +9,22 @@ import {
   queryStr,
 } from '../utils/index'
 
-export function getNode(nid: SanoNid): Promise<JsonResponse<SanoNode>> {
+export function getNode(nid: SanoNid): JsonResponsePromise<SanoNode> {
   const query = { nid }
   return fetch(`/api/node${queryStr(query)}`)
 }
 
-export function getNodes(nids: SanoNid[]): Promise<JsonResponse<SanoNode[]>> {
+export function getNodes(nids: SanoNid[]): JsonResponsePromise<SanoNode[]> {
   const query = { nids: nids.join(',') }
   return fetch(`/api/nodes${queryStr(query)}`)
 }
 
-export function getNodeBundle(nid: SanoNid): Promise<JsonResponse<SanoNodeBundle>> {
+export function getNodeBundle(nid: SanoNid): JsonResponsePromise<SanoNodeBundle> {
   const query = { nid }
   return fetch(`/api/nodebundle${queryStr(query)}`)
 }
 
-export function postNode(content: string, parent: SanoNid, nickname?: string | null): Promise<JsonResponse<{ nid: SanoNid }>> {
+export function postNode(content: string, parent: SanoNid, nickname?: string | null): JsonResponsePromise<{ nid: SanoNid }> {
   const data = { content, parent, nickname }
   return fetch('/api/node', {
     method: 'POST',

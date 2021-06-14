@@ -5,7 +5,7 @@ import {
   SanoNid,
   SanoNode,
   SanoNodeBundle,
-  SanoNodeMap,
+  SanoNodeRecord,
 } from '../types'
 
 import {
@@ -14,7 +14,7 @@ import {
   getNodeBundle as getNodeBundleApi,
 } from '../api/node'
 
-const cachedSanoNodeMap = ref<SanoNodeMap>({})
+const cachedSanoNodeRecord = ref<SanoNodeRecord>({})
 
 async function cacheNode<NID extends SanoNid>(nid: NID): Promise<SanoNode | undefined> {
   const res = await getNodeApi(nid)
@@ -23,7 +23,7 @@ async function cacheNode<NID extends SanoNid>(nid: NID): Promise<SanoNode | unde
     return
   }
   const node = await res.json()
-  cachedSanoNodeMap.value[node.nid] = node
+  cachedSanoNodeRecord.value[node.nid] = node
   return node
 }
 
@@ -37,7 +37,7 @@ async function cacheNodes<NID extends SanoNid>(nids: NID[]): Promise<SanoNode[] 
   }
   const nodes = await res.json()
   for (const node of nodes)
-    cachedSanoNodeMap.value[node.nid] = node
+    cachedSanoNodeRecord.value[node.nid] = node
   return nodes
 }
 
@@ -49,14 +49,14 @@ async function cacheNodeBundle<NID extends SanoNid>(nid: NID): Promise<SanoNodeB
   }
   const nodeBundle = await res.json()
   const { mainNode, childNodes } = nodeBundle
-  cachedSanoNodeMap.value[mainNode.nid] = mainNode
+  cachedSanoNodeRecord.value[mainNode.nid] = mainNode
   for (const childNode of childNodes)
-    cachedSanoNodeMap.value[childNode.nid] = childNode
+    cachedSanoNodeRecord.value[childNode.nid] = childNode
   return nodeBundle
 }
 
 export async function ensureNode<NID extends SanoNid>(nid: NID, refresh = false) {
-  const node = cachedSanoNodeMap.value[nid]
+  const node = cachedSanoNodeRecord.value[nid]
   if (node && !refresh)
     return node
   else
@@ -67,12 +67,12 @@ export async function ensureNodes<NID extends SanoNid>(nids: NID[], refresh = fa
   if (refresh)
     return await cacheNodes(nids) || []
 
-  const uncachedNodeNids = nids.filter(nid => !cachedSanoNodeMap.value[nid])
+  const uncachedNodeNids = nids.filter(nid => !cachedSanoNodeRecord.value[nid])
   await cacheNodes(uncachedNodeNids)
 
   const nodes: SanoNode[] = []
   for (const nid of nids) {
-    const node = cachedSanoNodeMap.value[nid]
+    const node = cachedSanoNodeRecord.value[nid]
     if (node) nodes.push(node)
   }
   return nodes
@@ -82,7 +82,7 @@ export async function ensureNodeBundle<NID extends SanoNid>(nid: NID, refresh = 
   if (refresh)
     return await cacheNodeBundle(nid)
 
-  const mainNode = cachedSanoNodeMap.value[nid]
+  const mainNode = cachedSanoNodeRecord.value[nid]
   if (!mainNode)
     return await cacheNodeBundle(nid)
 
@@ -100,7 +100,7 @@ export function useNode<NID extends SanoNid>(nid: NID | Ref<NID | undefined>, be
     }
     await ensureNode(_nid)
     afterUpdate?.()
-    return cachedSanoNodeMap.value[_nid]
+    return cachedSanoNodeRecord.value[_nid]
   }, undefined)
 }
 
@@ -111,7 +111,7 @@ export function useNodes<NID extends SanoNid>(nids: NID[] | Ref<NID[]>, beforeUp
     await ensureNodes(_nids)
     const nodes = []
     for (const nid of _nids) {
-      const node = cachedSanoNodeMap.value[nid]
+      const node = cachedSanoNodeRecord.value[nid]
       if (node) nodes.push(node)
     }
     afterUpdate?.()
@@ -128,14 +128,14 @@ export function useNodeBundle<NID extends SanoNid>(nid: NID | Ref<NID | undefine
       return undefined
     }
     await ensureNodeBundle(_nid)
-    const mainNode = cachedSanoNodeMap.value[_nid]
+    const mainNode = cachedSanoNodeRecord.value[_nid]
     if (!mainNode) {
       afterUpdate?.()
       return undefined
     }
     const childNodes = []
     for (const childNids of mainNode.children) {
-      const childNode = cachedSanoNodeMap.value[childNids]
+      const childNode = cachedSanoNodeRecord.value[childNids]
       if (childNode) childNodes.push(childNode)
     }
     afterUpdate?.()
