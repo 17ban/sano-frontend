@@ -2,14 +2,14 @@
 import { useRouteHistory } from '~/store/route-history'
 import { scrollIntoElement } from '~/utils/index'
 
-const { routeHistoryIndex, routeHistoryLength } = useRouteHistory()
+const { prevPath, nextPath } = useRouteHistory()
 </script>
 
 <template>
   <div class="px-2 py-2 z-50 flex flex-col fixed bottom-8 md:bottom-64 right-4 md:right-10 lg:right-40 xl:right-64 2xl:right-96">
     <button
       class="p-2 my-1 invisible md:visible bg-gray-600 text-gray-50 rounded-full shadow-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-75"
-      :class="{ 'menu-btn-disable': routeHistoryIndex <= 0 }"
+      :class="{ 'menu-btn-disable': !prevPath }"
       @click="$router.go(-1)"
     >
       <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -18,7 +18,7 @@ const { routeHistoryIndex, routeHistoryLength } = useRouteHistory()
     </button>
     <button
       class="p-2 my-1 invisible md:visible bg-gray-600 text-gray-50 rounded-full shadow-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-75"
-      :class="{ 'menu-btn-disable': routeHistoryIndex >= routeHistoryLength - 1 }"
+      :class="{ 'menu-btn-disable': !nextPath }"
       @click="$router.go(1)"
     >
       <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
