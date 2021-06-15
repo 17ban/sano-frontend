@@ -50,7 +50,7 @@ const router = useRouter()
     >
       <button
         v-if="props.displayNewNodeBtn"
-        class="p-2 mr-2 bg-gray-600 text-gray-50 rounded-2xl shadow-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-75"
+        class="p-2 mr-2 transition-colors bg-gray-600 text-gray-50 rounded-2xl shadow-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-75"
         :title="`New node on ${props.sanoNode.nid}`"
         @click="cardStore.toggleForm"
       >
@@ -65,7 +65,7 @@ const router = useRouter()
         class="flex flex-row items-center"
       >
         <a
-          class="py-1.5 px-4 bg-gray-600 text-gray-50 rounded-lg shadow-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-75"
+          class="py-1.5 px-4 transition-colors bg-gray-600 text-gray-50 rounded-lg shadow-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-75"
           :href="`/node/${props.sanoNode.parent}`"
           @click.prevent="props.prevPathIsParent ? router.go(-1) : router.push(`/node/${props.sanoNode.parent}`)"
         >
@@ -86,7 +86,7 @@ const router = useRouter()
         {{ `${props.sanoNode.children.length} node${props.sanoNode.children.length > 1 ? 's' : ''}` }}
       </span>
       <a
-        class="py-1.5 px-4 ml-3 bg-gray-600 text-gray-50 rounded-lg shadow-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-75"
+        class="py-1.5 px-4 ml-3 transition-colors bg-gray-600 text-gray-50 rounded-lg shadow-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-75"
         :href="`/node/${props.sanoNode.nid}`"
         @click.prevent="router.push(`/node/${props.sanoNode.nid}`)"
       >
