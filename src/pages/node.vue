@@ -1,16 +1,14 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import { useRoute } from 'vue-router'
 import NProgress from 'nprogress'
 
 import { useNodeBundle, ensureNodeBundle } from '~/store/cache'
-import { useRouteHistory } from '~/store/route-history'
+import { useRouteHistory, useNid } from '~/store/route'
 
 import NodeCard from '~/components/NodeCard/index.vue'
 import NodeCardLoading from '~/components/NodeCardLoading.vue'
 
-const route = useRoute()
-const nid = computed(() => route.params.nid as (string | undefined))
+const nid = useNid()
 const pageStatus = ref<'loaded' | 'loading'>('loading')
 
 let prevNid: string | undefined

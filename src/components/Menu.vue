@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useRouteHistory } from '~/store/route-history'
+import { useRouteHistory } from '~/store/route'
 import { scrollIntoElement } from '~/utils/index'
 
 const { prevPath, nextPath } = useRouteHistory()

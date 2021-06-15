@@ -1,12 +1,10 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-import { useRoute } from 'vue-router'
+import { useNid } from '~/store/route'
 
 import SearchBar from '~/components/SearchBar.vue'
 import Menu from '~/components/Menu.vue'
 
-const route = useRoute()
-const nid = computed(() => route.params.nid as (string | undefined))
+const nid = useNid()
 </script>
 
 <template>

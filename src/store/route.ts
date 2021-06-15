@@ -41,3 +41,9 @@ export function useRouteHistory() {
     nextPath,
   }
 }
+
+export function useNid() {
+  const route = useRoute()
+  const nid = computed(() => route.params.nid as (string | undefined))
+  return nid
+}
