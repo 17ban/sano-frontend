@@ -18,6 +18,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  prevPathIsParent: {
+    type: Boolean,
+    default: false,
+  },
   displayNewNodeBtn: {
     type: Boolean,
     default: true,
@@ -63,7 +67,7 @@ const router = useRouter()
         <a
           class="py-1.5 px-4 bg-gray-600 text-gray-50 rounded-lg shadow-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-75"
           :href="`/node/${props.sanoNode.parent}`"
-          @click.prevent="router.push(`/node/${props.sanoNode.parent}`)"
+          @click.prevent="props.prevPathIsParent ? router.go(-1) : router.push(`/node/${props.sanoNode.parent}`)"
         >
           <svg class="w-4 h-4 inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd" /></svg>
         </a>

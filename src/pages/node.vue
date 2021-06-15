@@ -4,6 +4,7 @@ import { useRoute } from 'vue-router'
 import NProgress from 'nprogress'
 
 import { useNodeBundle, ensureNodeBundle } from '~/store/cache'
+import { useRouteHistory } from '~/store/route-history'
 
 import NodeCard from '~/components/NodeCard/index.vue'
 import NodeCardLoading from '~/components/NodeCardLoading.vue'
@@ -31,6 +32,14 @@ const nodeBundle = useNodeBundle(
 const mainNode = computed(() => nodeBundle.value?.mainNode)
 const childNodes = computed(() => nodeBundle.value ? nodeBundle.value.childNodes : [])
 
+const { prevPath } = useRouteHistory()
+const prevPathIsParent = computed(() => {
+  if (!prevPath.value)
+    return false
+  const prevNid = prevPath.value.split('/').pop()
+  return prevNid === mainNode.value?.parent
+})
+
 async function refreshNodes() {
   if (!nid.value)
     return false
@@ -51,6 +60,7 @@ async function refreshNodes() {
         <NodeCard
           :sano-node="mainNode"
           :is-main="true"
+          :prev-path-is-parent="prevPathIsParent"
           @post-new-node="refreshNodes"
         />
       </div>

@@ -19,6 +19,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  prevPathIsParent: {
+    type: Boolean,
+    default: false,
+  },
   displayIndex: {
     type: Boolean,
     default: true,
@@ -61,6 +65,7 @@ function formSubmitHandler() {
       :card-store="cardStore"
       :sano-node="props.sanoNode"
       :is-main="props.isMain"
+      :prev-path-is-parent="props.prevPathIsParent"
       :display-new-node-btn="props.displayNewNodeBtn"
     />
     <NewNodeForm
