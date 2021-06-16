@@ -11,6 +11,7 @@
     "sano",
     "stylelint",
     "tailwindcss",
+    "textboard",
     "vueuse"
   ],
   "css.validate": false, // Disable css built-in lint
