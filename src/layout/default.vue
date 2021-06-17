@@ -1,10 +1,23 @@
 <script setup lang="ts">
-import { useNid } from '~/store/route'
+import { watchEffect } from 'vue'
+import { useRouteHistory, useNid } from '~/store/route'
 
 import SearchBar from '~/components/SearchBar.vue'
 import Menu from '~/components/Menu.vue'
 
+const { currentPath } = useRouteHistory()
 const nid = useNid()
+
+watchEffect(() => {
+  let title
+  if (currentPath.value === '/home')
+    title = 'Home - Sano'
+  else if (currentPath.value === '/unknown')
+    title = 'Unknown Page - Sano'
+  else
+    title = nid.value ? `${nid.value} - Sano` : 'Sano'
+  document.title = title
+})
 </script>
 
 <template>
