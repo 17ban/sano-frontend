@@ -1,6 +1,14 @@
 {
   "name": "sano-frontend",
-  "version": "1.0.0",
+  "description": "The frontend project of Sano.",
+  "private": true,
+  "author": "17ban",
+  "license": "MIT",
+  "homepage": "https://sano.17ban.icu",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/17ban/sano-frontend.git"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
