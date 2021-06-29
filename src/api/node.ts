@@ -9,7 +9,9 @@ import {
   queryStr,
 } from '../utils/index'
 
-const apiBaseUrl = 'https://sano.17ban.icu/api'
+const apiBaseUrl = process.env.NODE_ENV === 'production'
+  ? 'https://api.sano.17ban.icu'
+  : '/api'
 
 export function getNode(nid: SanoNid): JsonResponsePromise<SanoNode> {
   const query = { nid }
