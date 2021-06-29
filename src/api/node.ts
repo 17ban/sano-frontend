@@ -22,7 +22,7 @@ export function getNodes(nids: SanoNid[]): JsonResponsePromise<SanoNode[]> {
 }
 
 export function getStickyNids(): JsonResponsePromise<SanoNid[]> {
-  return fetch('${apiBaseUrl}/sticky-nids')
+  return fetch(`${apiBaseUrl}/sticky-nids`)
 }
 
 export function getNodeBundle(nid: SanoNid): JsonResponsePromise<SanoNodeBundle> {
@@ -32,7 +32,7 @@ export function getNodeBundle(nid: SanoNid): JsonResponsePromise<SanoNodeBundle>
 
 export function postNode(content: string, parent: SanoNid, nickname?: string | null): JsonResponsePromise<{ nid: SanoNid }> {
   const data = { content, parent, nickname }
-  return fetch('${apiBaseUrl}/node', {
+  return fetch(`${apiBaseUrl}/node`, {
     method: 'POST',
     body: JSON.stringify(data),
     headers: {
