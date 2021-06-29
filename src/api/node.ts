@@ -9,28 +9,30 @@ import {
   queryStr,
 } from '../utils/index'
 
+const apiBaseUrl = 'https://17ban.icu/api'
+
 export function getNode(nid: SanoNid): JsonResponsePromise<SanoNode> {
   const query = { nid }
-  return fetch(`/api/node${queryStr(query)}`)
+  return fetch(`${apiBaseUrl}/node${queryStr(query)}`)
 }
 
 export function getNodes(nids: SanoNid[]): JsonResponsePromise<SanoNode[]> {
   const query = { nids: nids.join(',') }
-  return fetch(`/api/nodes${queryStr(query)}`)
+  return fetch(`${apiBaseUrl}/nodes${queryStr(query)}`)
 }
 
 export function getStickyNids(): JsonResponsePromise<SanoNid[]> {
-  return fetch('/api/sticky-nids')
+  return fetch('${apiBaseUrl}/sticky-nids')
 }
 
 export function getNodeBundle(nid: SanoNid): JsonResponsePromise<SanoNodeBundle> {
   const query = { nid }
-  return fetch(`/api/nodebundle${queryStr(query)}`)
+  return fetch(`${apiBaseUrl}/nodebundle${queryStr(query)}`)
 }
 
 export function postNode(content: string, parent: SanoNid, nickname?: string | null): JsonResponsePromise<{ nid: SanoNid }> {
   const data = { content, parent, nickname }
-  return fetch('/api/node', {
+  return fetch('${apiBaseUrl}/node', {
     method: 'POST',
     body: JSON.stringify(data),
     headers: {
