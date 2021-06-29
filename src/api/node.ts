@@ -9,7 +9,7 @@ import {
   queryStr,
 } from '../utils/index'
 
-const apiBaseUrl = 'https://17ban.icu/api'
+const apiBaseUrl = 'https://sano.17ban.icu/api'
 
 export function getNode(nid: SanoNid): JsonResponsePromise<SanoNode> {
   const query = { nid }
